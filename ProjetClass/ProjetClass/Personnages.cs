@@ -10,10 +10,9 @@ namespace ProjetClass
     {
         protected string m_name;
         protected int m_vie, m_vieMax,
-            m_mana, m_manaMax,
-            m_puissance, m_puissMagic,
-            m_defense, m_defMagic;
-		//c'est tropo mrant
+			m_mana, m_manaMax,
+			m_puissance, m_puissMagic,
+			m_defense, m_defMagic;
 
         public Personnages(string name)
         {
@@ -22,6 +21,7 @@ namespace ProjetClass
             m_manaMax = 1000; m_mana = m_manaMax;
             m_puissance = 50; m_puissMagic = 50;
             m_defense = 50; m_defMagic = 50;
+			//LLOOOOL
         }
 
         public void attaque(Personnages cible)
