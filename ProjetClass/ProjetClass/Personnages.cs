@@ -13,6 +13,7 @@ namespace ProjetClass
             m_mana, m_manaMax,
             m_puissance, m_puissMagic,
             m_defense, m_defMagic;
+		//c'est tropo mrant
 
         public Personnages(string name)
         {
