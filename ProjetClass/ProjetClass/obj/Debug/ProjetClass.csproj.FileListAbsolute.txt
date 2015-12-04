@@ -1,1 +1,2 @@
 F:\Mes documents\Informatique\C#\ProjetClass\ProjetClass\bin\Debug\ProjetClass.exe.config
+F:\Mes documents\Informatique\C#\Project\ProjetClass\ProjetClass\bin\Debug\ProjetClass.exe.config
