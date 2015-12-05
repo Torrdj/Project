@@ -24,4 +24,3 @@ Caracteristique Classe :
 
 
 Attaque Classe :
-
