@@ -5,3 +5,6 @@ F:\Mes documents\Informatique\C#\Project\ProjetClass\ProjetClass\bin\Debug\Proje
 F:\Mes documents\Informatique\C#\Project\ProjetClass\ProjetClass\obj\Debug\ProjetClass.csprojResolveAssemblyReference.cache
 F:\Mes documents\Informatique\C#\Project\ProjetClass\ProjetClass\obj\Debug\ProjetClass.exe
 F:\Mes documents\Informatique\C#\Project\ProjetClass\ProjetClass\obj\Debug\ProjetClass.pdb
+C:\Users\Damien\Desktop\GitHub\Project\ProjetClass\ProjetClass\bin\Debug\ProjetClass.exe.config
+C:\Users\Damien\Desktop\GitHub\Project\ProjetClass\ProjetClass\obj\Debug\ProjetClass.exe
+C:\Users\Damien\Desktop\GitHub\Project\ProjetClass\ProjetClass\obj\Debug\ProjetClass.pdb
