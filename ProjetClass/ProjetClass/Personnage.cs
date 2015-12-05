@@ -18,7 +18,7 @@ namespace ProjetClass
             this.m_name = name;
             m_vieMax = 1000; m_vie = m_vieMax;
             m_manaMax = 1000; m_mana = m_manaMax;
-            m_puissance = 50; m_defense = 10;
+            m_puissance = 50; m_defense = 20;
         }
 
         public void attaque(Personnage cible)
