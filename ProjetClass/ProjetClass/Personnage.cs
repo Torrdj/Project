@@ -11,19 +11,21 @@ namespace ProjetClass
         protected string m_name;
         protected float m_vie, m_vieMax,
             m_mana, m_manaMax,
-            m_puissance, m_defense;
+            m_attaque, m_defense,
+            m_vitesseAtt;
 
         public Personnage(string name)
         {
             this.m_name = name;
             m_vieMax = 1000; m_vie = m_vieMax;
             m_manaMax = 1000; m_mana = m_manaMax;
-            m_puissance = 50; m_defense = 10;
+            m_attaque = 50; m_defense = 20;
+            m_vitesseAtt = 1.0f;
         }
 
         public void attaque(Personnage cible)
         {
-            cible.receiveDamages(m_puissance);
+            cible.receiveDamages(m_attaque);
         }
 
         public void receiveDamages(float damages)

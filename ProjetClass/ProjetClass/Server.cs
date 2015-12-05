@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace ProjetClass
 {
-    class Program
+    class Server : Personnage
     {
-        static void Main(string[] args)
+        public Server(string name) : base(name)
         {
-
+            m_vieMax *= 1.5f;
+            m_defense *= 1.2f;
+            m_vitesseAtt *= 0.75f;
         }
     }
 }

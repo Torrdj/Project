@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProjetClass
 {
-    class Program
+    class Computer : Personnage
     {
-        static void Main(string[] args)
+        public Computer(string name) : base(name)
         {
-
+            m_attaque *= 1.2f;
         }
     }
 }
