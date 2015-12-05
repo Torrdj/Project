@@ -16,9 +16,18 @@ namespace ProjetClass
             m_attaque *= 0.9f;
         }
 
-        public float turboBoost()
+        public void turboBoost()
         {
-            return 0;
+            float oldVit = m_vitesseAtt;
+            float newVit = m_vitesseAtt * 2;
+
+            new System.Threading.Thread(() =>
+            {
+                System.Threading.Thread.Sleep(5000);
+                m_vitesseAtt = oldVit;
+            }).Start();
+
+            m_vitesseAtt = newVit;
         }
     }
 }

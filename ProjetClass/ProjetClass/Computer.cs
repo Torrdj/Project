@@ -16,7 +16,7 @@ namespace ProjetClass
 
         public float failureSystem()
         {
-            return 0;
+            return 200 + m_attaque;
         }
     }
 }

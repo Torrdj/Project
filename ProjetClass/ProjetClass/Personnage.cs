@@ -13,6 +13,7 @@ namespace ProjetClass
             m_mana, m_manaMax,
             m_attaque, m_defense,
             m_vitesseAtt;
+        protected bool m_isParalyzed = false;
 
         public Personnage(){}
 
@@ -60,6 +61,11 @@ namespace ProjetClass
         public float getMana()
         {
             return m_mana;
+        }
+
+        public float getVitAtt()
+        {
+            return m_vitesseAtt;
         }
 
         public void setVie(float vie)

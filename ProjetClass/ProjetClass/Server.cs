@@ -19,7 +19,12 @@ namespace ProjetClass
 
         public void DDOS(Personnage cible)
         {
-
+            new System.Threading.Thread(() =>
+            {
+                System.Threading.Thread.Sleep(5000);
+                m_isParalyzed = false;
+            }).Start();
+            m_isParalyzed = true;
         }
 
         public void firewall()
