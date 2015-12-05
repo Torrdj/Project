@@ -8,9 +8,15 @@ namespace ProjetClass
 {
     class Computer : Personnage
     {
+        public Computer() { }
         public Computer(string name) : base(name)
         {
             m_attaque *= 1.2f;
+        }
+
+        public float failureSystem()
+        {
+            return 0;
         }
     }
 }

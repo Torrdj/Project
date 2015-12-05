@@ -10,7 +10,7 @@ namespace ProjetClass
     {
         static void Main(string[] args)
         {
-            
+
         }
     }
 }

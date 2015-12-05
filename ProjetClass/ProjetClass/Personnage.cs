@@ -14,6 +14,8 @@ namespace ProjetClass
             m_attaque, m_defense,
             m_vitesseAtt;
 
+        public Personnage(){}
+
         public Personnage(string name)
         {
             this.m_name = name;
@@ -23,9 +25,9 @@ namespace ProjetClass
             m_vitesseAtt = 1.0f;
         }
 
-        public void attaque(Personnage cible)
+        public void attaque(Personnage cible, float damages)
         {
-            cible.receiveDamages(m_attaque);
+            cible.receiveDamages(damages);
         }
 
         public void receiveDamages(float damages)
@@ -38,6 +40,11 @@ namespace ProjetClass
 
             if (m_vie >= m_vieMax)
                 m_vie = m_vieMax;
+        }
+
+        public float coupDeMolette()
+        {
+            return m_attaque;
         }
 
         public bool isAlive()
