@@ -17,36 +17,50 @@ namespace ProjetClass
             bool attaque2 = true;
 
             #region Serveur/Computer
+
             while (serveur.isAlive() && computer.isAlive())
             {
-                if (attaque1)
+                bool[] ServerLoading = { serveur.firewall_Isload(), serveur.ddos_Isload() };
+
+
+                if (serveur.IsLoad() && !serveur.IsParalysed())
                 {
-                    attaque1 = false;
-                    new System.Threading.Thread(() =>
+                    int i = 0;
+                    while (i < ServerLoading.Length-1 && !ServerLoading[i])
                     {
-                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * serveur.getVitAtt()));
-                        serveur.attaque(computer, serveur.getDamage());
-                        attaque1 = true;
-                    }).Start();
+
+                    }
+                    serveur.attaque(computer, serveur.coupDeMolette());
+
                 }
 
-                if (attaque2)
-                {
-                    attaque2 = false;
-                    new System.Threading.Thread(() =>
-                    {
-                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * computer.getVitAtt()));
-                        computer.attaque(serveur, computer.getDamage());
-                        attaque2 = true;
-                    }).Start();
-                }
+
+
+
+                if (computer.IsLoad() && !computer.IsParalysed())
+                    computer.attaque(serveur, computer.coupDeMolette());
             }
+
+
+
+
+
+
+
+
+
             Console.WriteLine("serveur : " + serveur.getVie());
             Console.WriteLine("Computer : " + computer.getVie());
             serveur = new Server("Serveur");
             computer = new Computer("Computer");
 
             #endregion
+
+
+
+
+
+
             Console.WriteLine();
 
             #region Server/laptop
@@ -58,7 +72,7 @@ namespace ProjetClass
                     new System.Threading.Thread(() =>
                     {
                         System.Threading.Thread.Sleep(Convert.ToInt32(1000f * serveur.getVitAtt()));
-                        serveur.attaque(laptop, serveur.getDamage());
+                        serveur.attaque(laptop, serveur.coupDeMolette());
                         attaque1 = true;
                     }).Start();
                 }
@@ -69,7 +83,7 @@ namespace ProjetClass
                     new System.Threading.Thread(() =>
                     {
                         System.Threading.Thread.Sleep(Convert.ToInt32(1000f * laptop.getVitAtt()));
-                        laptop.attaque(serveur, laptop.getDamage());
+                        laptop.attaque(serveur, laptop.coupDeMolette());
                         attaque2 = true;
                     }).Start();
                 }
@@ -90,7 +104,7 @@ namespace ProjetClass
                     new System.Threading.Thread(() =>
                     {
                         System.Threading.Thread.Sleep(Convert.ToInt32(1000f * laptop.getVitAtt()));
-                        laptop.attaque(computer, laptop.getDamage());
+                        laptop.attaque(computer, laptop.coupDeMolette());
                         attaque1 = true;
                     }).Start();
                 }
@@ -101,7 +115,7 @@ namespace ProjetClass
                     new System.Threading.Thread(() =>
                     {
                         System.Threading.Thread.Sleep(Convert.ToInt32(1000f * computer.getVitAtt()));
-                        computer.attaque(laptop, computer.getDamage());
+                        computer.attaque(laptop, computer.coupDeMolette());
                         attaque2 = true;
                     }).Start();
                 }

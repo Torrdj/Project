@@ -8,14 +8,15 @@ namespace ProjetClass
 {
     class Personnage
     {
+        protected bool load = true;
         protected string m_name;
         protected float m_vie, m_vieMax,
             m_mana, m_manaMax,
             m_attaque, m_defense,
             m_vitesseAtt;
-        public bool m_isParalyzed = false;
+        protected bool m_isParalyzed = false;
 
-        public Personnage(){}
+        public Personnage() { }
 
         public Personnage(string name)
         {
@@ -26,9 +27,25 @@ namespace ProjetClass
             m_vitesseAtt = 1.0f;
         }
 
+        public bool IsLoad()
+        {
+            return load;
+        }
+
+        public bool IsParalysed()
+        {
+            return m_isParalyzed;
+        }
+
         public void attaque(Personnage cible, float damages)
         {
             cible.receiveDamages(damages);
+            new System.Threading.Thread(() =>
+            {
+                System.Threading.Thread.Sleep(Convert.ToInt32(1000 * m_vitesseAtt));
+                load = true;
+            }).Start();
+            load = false;
         }
 
         public void receiveDamages(float damages)
@@ -41,11 +58,6 @@ namespace ProjetClass
 
             if (m_vie >= m_vieMax)
                 m_vie = m_vieMax;
-        }
-
-        public float getDamage()
-        {
-            return m_attaque;
         }
 
         public float coupDeMolette()
