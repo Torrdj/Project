@@ -13,7 +13,7 @@ namespace ProjetClass
             m_mana, m_manaMax,
             m_attaque, m_defense,
             m_vitesseAtt;
-        protected bool m_isParalyzed = false;
+        public bool m_isParalyzed = false;
 
         public Personnage(){}
 

@@ -12,14 +12,14 @@ namespace ProjetClass
         public Laptop(string name) : base(name)
         {
             m_vieMax *= 0.9f; m_vie = m_vieMax;
-            m_vitesseAtt *= 1.3f;
+            m_vitesseAtt *= 0.5f;
             m_attaque *= 0.9f;
         }
 
-        public void turboBoost()
+        public void turboBoost()//20 s de recharge
         {
             float oldVit = m_vitesseAtt;
-            float newVit = m_vitesseAtt * 2;
+            float newVit = m_vitesseAtt * 0.5f;
 
             new System.Threading.Thread(() =>
             {

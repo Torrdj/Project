@@ -14,7 +14,7 @@ namespace ProjetClass
             m_attaque *= 1.2f;
         }
 
-        public float failureSystem()
+        public float failureSystem()//15s de recharge
         {
             return 200 + m_attaque;
         }

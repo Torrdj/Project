@@ -35,7 +35,7 @@ namespace ProjetClass
                     attaque2 = false;
                     new System.Threading.Thread(() =>
                     {
-                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * serveur.getVitAtt()));
+                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * computer.getVitAtt()));
                         computer.attaque(serveur, computer.getDamage());
                         attaque2 = true;
                     }).Start();
@@ -68,7 +68,7 @@ namespace ProjetClass
                     attaque2 = false;
                     new System.Threading.Thread(() =>
                     {
-                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * serveur.getVitAtt()));
+                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * laptop.getVitAtt()));
                         laptop.attaque(serveur, laptop.getDamage());
                         attaque2 = true;
                     }).Start();
@@ -89,7 +89,7 @@ namespace ProjetClass
                     attaque1 = false;
                     new System.Threading.Thread(() =>
                     {
-                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * serveur.getVitAtt()));
+                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * laptop.getVitAtt()));
                         laptop.attaque(computer, laptop.getDamage());
                         attaque1 = true;
                     }).Start();
@@ -100,7 +100,7 @@ namespace ProjetClass
                     attaque2 = false;
                     new System.Threading.Thread(() =>
                     {
-                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * serveur.getVitAtt()));
+                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * computer.getVitAtt()));
                         computer.attaque(laptop, computer.getDamage());
                         attaque2 = true;
                     }).Start();
