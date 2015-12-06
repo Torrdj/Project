@@ -142,7 +142,7 @@ namespace ProjetClass
             }
 
             Console.WriteLine("serveur : " + serveur.getVie());
-            Console.WriteLine("Computer : " + laptop.getVie());
+            Console.WriteLine("Laptop : " + laptop.getVie());
             serveur = new Server("Serveur");
             laptop = new Laptop("Laptop");
 
@@ -192,7 +192,7 @@ namespace ProjetClass
                             switch (i)
                             {
                                 case 0:
-                                    computer.failureSystem(serveur);
+                                    computer.failureSystem(laptop);
                                     hadAttaque = true;
                                     break;
                             }
@@ -200,7 +200,7 @@ namespace ProjetClass
                         }
                     }
                     if (!hadAttaque)
-                        computer.attaque(serveur, computer.coupDeMolette());
+                        computer.attaque(laptop, computer.coupDeMolette());
                 }
             }
 
