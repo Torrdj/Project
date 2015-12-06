@@ -8,7 +8,7 @@ class Personnage
         Attaque = 50
         Vitesse d'Attaque = 1000 ms
         Defense = 20
-
+        
         Attaque : 
             - Coup de molette
     */
@@ -21,6 +21,7 @@ class Server /// : Personnage
         Vitesse d'Attaque *= 1.25 -> 1250 ms
 
         Attaques :
+            - Coup de molette
             - DDOS
             - Firewall
     */
@@ -30,7 +31,8 @@ class Computer /// : Personnage
     /*
         Attaque *= 1,2 -> 60
 
-        Attaque : 
+        Attaques : 
+            - Coup de molette
             - FailureSystem
     */
 }
@@ -41,7 +43,8 @@ class Laptop /// : Personnage
         Vitesse d'Attaque *= 0,5 -> 500 ms
         Attaque *= 0,9 -> 45
 
-        Attaque : 
+        Attaques : 
+            - Coup de molette
             - Turbo Boost
     */
 }
