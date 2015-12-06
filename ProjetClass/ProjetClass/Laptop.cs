@@ -8,12 +8,19 @@ namespace ProjetClass
 {
     class Laptop : Personnage
     {
+        protected bool turbo_isLoad = true;
+
         public Laptop() { }
         public Laptop(string name) : base(name)
         {
             m_vieMax *= 0.9f; m_vie = m_vieMax;
             m_vitesseAtt *= 0.5f;
             m_attaque *= 0.9f;
+        }
+
+        public bool turboBoost_isLoad()
+        {
+            return turbo_isLoad;
         }
 
         public void turboBoost()//20 s de recharge

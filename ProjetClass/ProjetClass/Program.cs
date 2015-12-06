@@ -21,33 +21,38 @@ namespace ProjetClass
             while (serveur.isAlive() && computer.isAlive())
             {
                 bool[] ServerLoading = { serveur.firewall_Isload(), serveur.ddos_Isload() };
-
+                bool[] ComputerLoading = {  };
 
                 if (serveur.IsLoad() && !serveur.IsParalysed())
                 {
                     int i = 0;
-                    while (i < ServerLoading.Length-1 && !ServerLoading[i])
+                    bool hadAttaque = false;
+                    while (i < ServerLoading.Length)
                     {
-
+                        if (!ServerLoading[i])
+                            i++;
+                        else
+                        {
+                            switch (i)
+                            {
+                                case 0:
+                                    serveur.firewall();
+                                    hadAttaque = true;
+                                    break;
+                                case 1:
+                                    serveur.DDOS(computer);
+                                    hadAttaque = true;
+                                    break;
+                            }
+                        }
                     }
-                    serveur.attaque(computer, serveur.coupDeMolette());
-
+                    if (!hadAttaque)
+                        serveur.attaque(computer, serveur.coupDeMolette());
                 }
-
-
-
 
                 if (computer.IsLoad() && !computer.IsParalysed())
                     computer.attaque(serveur, computer.coupDeMolette());
             }
-
-
-
-
-
-
-
-
 
             Console.WriteLine("serveur : " + serveur.getVie());
             Console.WriteLine("Computer : " + computer.getVie());
@@ -56,10 +61,7 @@ namespace ProjetClass
 
             #endregion
 
-
-
-
-
+            
 
             Console.WriteLine();
 
