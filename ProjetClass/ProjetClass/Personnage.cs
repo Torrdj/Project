@@ -43,6 +43,11 @@ namespace ProjetClass
                 m_vie = m_vieMax;
         }
 
+        public float getDamage()
+        {
+            return m_attaque;
+        }
+
         public float coupDeMolette()
         {
             return m_attaque;
