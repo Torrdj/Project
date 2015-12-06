@@ -18,6 +18,7 @@ namespace ProjetClass
             m_attaque *= 0.9f;
         }
 
+        #region Attaque TurboBoost
         public bool turboBoost_isLoad()
         {
             return turbo_isLoad;
@@ -27,6 +28,7 @@ namespace ProjetClass
         {
             float oldVit = m_vitesseAtt;
             float newVit = m_vitesseAtt * 0.5f;
+            turbo_isLoad = false;
 
             new System.Threading.Thread(() =>
             {
@@ -35,6 +37,13 @@ namespace ProjetClass
             }).Start();
 
             m_vitesseAtt = newVit;
+
+            new System.Threading.Thread(() =>
+            {
+                System.Threading.Thread.Sleep(Convert.ToInt32(20000));
+                turbo_isLoad = true;
+            }).Start();
         }
+        #endregion
     }
 }

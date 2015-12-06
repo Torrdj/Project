@@ -19,6 +19,7 @@ namespace ProjetClass
             m_vitesseAtt *= 1.25f;
         }
 
+        #region Attaque DDOS
         public bool ddos_Isload()
         {
             return ddos_load;
@@ -41,7 +42,9 @@ namespace ProjetClass
                 ddos_load = true;
             }).Start();
         }
+        #endregion
 
+        #region Attaque Firewall
         public bool firewall_Isload()
         {
             return firewall_load;
@@ -51,15 +54,22 @@ namespace ProjetClass
         {
             float oldDef = m_defense;
             float newDef = m_defense * 2;
-
-            //"tâche de fond" pour pas bloquer le programme
+            
             new System.Threading.Thread(() =>
             {
                 System.Threading.Thread.Sleep(5000);
-                m_defense = oldDef;//On retrouve une def normale à la fin du buff
+                m_defense = oldDef;
             }).Start();
 
             m_defense = newDef;
+            firewall_load = false;
+            new System.Threading.Thread(() =>
+            {
+                System.Threading.Thread.Sleep(Convert.ToInt32(20000));
+                firewall_load = true;
+            }).Start();
         }
+        #endregion
+
     }
 }
