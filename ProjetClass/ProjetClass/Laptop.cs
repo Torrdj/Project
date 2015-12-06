@@ -37,7 +37,7 @@ namespace ProjetClass
             }).Start();
 
             m_vitesseAtt = newVit;
-
+            
             new System.Threading.Thread(() =>
             {
                 System.Threading.Thread.Sleep(Convert.ToInt32(20000));

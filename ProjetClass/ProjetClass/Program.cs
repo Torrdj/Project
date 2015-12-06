@@ -13,15 +13,13 @@ namespace ProjetClass
             Server serveur = new Server("Serveur");
             Computer computer = new Computer("Computer");
             Laptop laptop = new Laptop("laptop");
-            bool attaque1 = true;
-            bool attaque2 = true;
 
             #region Serveur/Computer
 
             while (serveur.isAlive() && computer.isAlive())
             {
                 bool[] ServerLoading = { serveur.firewall_Isload(), serveur.ddos_Isload() };
-                bool[] ComputerLoading = {  };
+                bool[] ComputerLoading = { computer.failureSytem_Isload() };
 
                 if (serveur.IsLoad() && !serveur.IsParalysed())
                 {
@@ -44,6 +42,7 @@ namespace ProjetClass
                                     hadAttaque = true;
                                     break;
                             }
+                            i++;
                         }
                     }
                     if (!hadAttaque)
@@ -51,7 +50,28 @@ namespace ProjetClass
                 }
 
                 if (computer.IsLoad() && !computer.IsParalysed())
-                    computer.attaque(serveur, computer.coupDeMolette());
+                {
+                    int i = 0;
+                    bool hadAttaque = false;
+                    while (i < ComputerLoading.Length)
+                    {
+                        if (!ComputerLoading[i])
+                            i++;
+                        else
+                        {
+                            switch (i)
+                            {
+                                case 0:
+                                    computer.failureSystem(serveur);
+                                    hadAttaque = true;
+                                    break;
+                            }
+                            i++;
+                        }
+                    }
+                    if (!hadAttaque)
+                        computer.attaque(serveur, computer.coupDeMolette());
+                }
             }
 
             Console.WriteLine("serveur : " + serveur.getVie());
@@ -60,70 +80,134 @@ namespace ProjetClass
             computer = new Computer("Computer");
 
             #endregion
-
-            
-
             Console.WriteLine();
 
             #region Server/laptop
             while (serveur.isAlive() && laptop.isAlive())
             {
-                if (attaque1)
+                bool[] ServerLoading = { serveur.firewall_Isload(), serveur.ddos_Isload() };
+                bool[] LaptopLoading = { laptop.turboBoost_isLoad() };
+
+                if (serveur.IsLoad() && !serveur.IsParalysed())
                 {
-                    attaque1 = false;
-                    new System.Threading.Thread(() =>
+                    int i = 0;
+                    bool hadAttaque = false;
+                    while (i < ServerLoading.Length)
                     {
-                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * serveur.getVitAtt()));
+                        if (!ServerLoading[i])
+                            i++;
+                        else
+                        {
+                            switch (i)
+                            {
+                                case 0:
+                                    serveur.firewall();
+                                    hadAttaque = true;
+                                    break;
+                                case 1:
+                                    serveur.DDOS(laptop);
+                                    hadAttaque = true;
+                                    break;
+                            }
+                            i++;
+                        }
+                    }
+                    if (!hadAttaque)
                         serveur.attaque(laptop, serveur.coupDeMolette());
-                        attaque1 = true;
-                    }).Start();
                 }
 
-                if (attaque2)
+                if (laptop.IsLoad() && !laptop.IsParalysed())
                 {
-                    attaque2 = false;
-                    new System.Threading.Thread(() =>
+                    int i = 0;
+                    bool hadAttaque = false;
+                    while (i < LaptopLoading.Length)
                     {
-                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * laptop.getVitAtt()));
+                        if (!LaptopLoading[i])
+                            i++;
+                        else
+                        {
+                            switch (i)
+                            {
+                                case 0:
+                                    laptop.turboBoost();
+                                    hadAttaque = true;
+                                    break;
+                            }
+                            i++;
+                        }
+                    }
+                    if (!hadAttaque)
                         laptop.attaque(serveur, laptop.coupDeMolette());
-                        attaque2 = true;
-                    }).Start();
                 }
             }
+
             Console.WriteLine("serveur : " + serveur.getVie());
-            Console.WriteLine("laptop : " + laptop.getVie());
+            Console.WriteLine("Computer : " + laptop.getVie());
             serveur = new Server("Serveur");
-            laptop = new Laptop("laptop");
+            laptop = new Laptop("Laptop");
+
             #endregion
             Console.WriteLine();
 
             #region Computer/laptop
             while (laptop.isAlive() && computer.isAlive())
             {
-                if (attaque1)
+                bool[] LaptopLoading = { laptop.turboBoost_isLoad() };
+                bool[] ComputerLoading = { computer.failureSytem_Isload() };
+
+                if (laptop.IsLoad() && !laptop.IsParalysed())
                 {
-                    attaque1 = false;
-                    new System.Threading.Thread(() =>
+                    int i = 0;
+                    bool hadAttaque = false;
+                    while (i < LaptopLoading.Length)
                     {
-                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * laptop.getVitAtt()));
+                        if (!LaptopLoading[i])
+                            i++;
+                        else
+                        {
+                            switch (i)
+                            {
+                                case 0:
+                                    laptop.turboBoost();
+                                    hadAttaque = true;
+                                    break;
+                            }
+                            i++;
+                        }
+                    }
+                    if (!hadAttaque)
                         laptop.attaque(computer, laptop.coupDeMolette());
-                        attaque1 = true;
-                    }).Start();
                 }
 
-                if (attaque2)
+                if (computer.IsLoad() && !computer.IsParalysed())
                 {
-                    attaque2 = false;
-                    new System.Threading.Thread(() =>
+                    int i = 0;
+                    bool hadAttaque = false;
+                    while (i < ComputerLoading.Length)
                     {
-                        System.Threading.Thread.Sleep(Convert.ToInt32(1000f * computer.getVitAtt()));
-                        computer.attaque(laptop, computer.coupDeMolette());
-                        attaque2 = true;
-                    }).Start();
+                        if (!ComputerLoading[i])
+                            i++;
+                        else
+                        {
+                            switch (i)
+                            {
+                                case 0:
+                                    computer.failureSystem(serveur);
+                                    hadAttaque = true;
+                                    break;
+                            }
+                            i++;
+                        }
+                    }
+                    if (!hadAttaque)
+                        computer.attaque(serveur, computer.coupDeMolette());
                 }
             }
-            Console.WriteLine("computer : " + computer.getVie());
-            Console.WriteLine("laptop : " + laptop.getVie());
+
+            Console.WriteLine("Laptop : " + laptop.getVie());
+            Console.WriteLine("Computer : " + computer.getVie());
+            laptop = new Laptop("Laptop");
+            computer = new Computer("Computer");
             #endregion
             Console.Read();
 
