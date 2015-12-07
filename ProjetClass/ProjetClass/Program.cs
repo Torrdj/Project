@@ -13,6 +13,77 @@ namespace ProjetClass
             Server serveur = new Server("Serveur");
             Computer computer = new Computer("Computer");
             Laptop laptop = new Laptop("laptop");
+            Laptop laptop1 = new Laptop("laptop1");
+
+            #region Laptop/Latop
+
+            while(laptop.isAlive() && laptop1.isAlive())
+            {
+                bool[] LaptopLoading = { laptop.turboBoost_isLoad() };
+                bool[] LaptopLoading1 = { laptop1.turboBoost_isLoad() };
+
+                if (laptop1.IsLoad() && !laptop1.IsParalysed())
+                {
+                    int i = 0;
+                    bool hadAttaque = false;
+                    while (i < LaptopLoading1.Length)
+                    {
+                        if (!LaptopLoading1[i])
+                            i++;
+                        else
+                        {
+                            switch (i)
+                            {
+                                case 0:
+                                    laptop1.turboBoost();
+                                    hadAttaque = true;
+                                    break;
+                            }
+                            i++;
+                        }
+                    }
+                    if (!hadAttaque)
+                        laptop1.attaque(laptop, laptop1.coupDeMolette());
+                }
+
+
+
+
+                if (laptop.IsLoad() && !laptop.IsParalysed())
+                {
+                    int i = 0;
+                    bool hadAttaque = false;
+                    while (i < LaptopLoading.Length)
+                    {
+                        if (!LaptopLoading[i])
+                            i++;
+                        else
+                        {
+                            switch (i)
+                            {
+                                case 0:
+                                    laptop.turboBoost();
+                                    hadAttaque = true;
+                                    break;
+                            }
+                            i++;
+                        }
+                    }
+                    if (!hadAttaque)
+                        laptop.attaque(laptop1, laptop.coupDeMolette());
+                }
+
+
+            }
+
+
+            Console.WriteLine("Laptop : " + laptop.getVie());
+            Console.WriteLine("Laptop1 : " + laptop1.getVie());
+
+            laptop = new Laptop("laptop");
+            #endregion
+            Console.WriteLine();
+
 
             #region Serveur/Computer
 
