@@ -17,7 +17,6 @@ namespace ProjetClass
             Laptop laptop = new Laptop("laptop");
             Laptop laptop1 = new Laptop("laptop1");
 
-
             #region Laptop/Latop
 
             while (laptop.isAlive() && laptop1.isAlive())

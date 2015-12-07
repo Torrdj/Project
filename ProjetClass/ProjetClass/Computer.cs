@@ -16,6 +16,7 @@ namespace ProjetClass
         }
 
 
+
         #region Attaque FailureSystem
         public bool failureSytem_Isload()
         {
