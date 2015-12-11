@@ -14,9 +14,7 @@ namespace ProjetClass
         {
             m_attaque *= 1.2f;
         }
-
-
-
+        
         #region Attaque FailureSystem
         public bool failureSytem_Isload()
         {

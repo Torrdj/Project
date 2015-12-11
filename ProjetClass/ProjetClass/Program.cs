@@ -18,7 +18,7 @@ namespace ProjetClass
             Laptop laptop1 = new Laptop("laptop1");
 
             #region Laptop/Latop
-
+/*
             while (laptop.isAlive() && laptop1.isAlive())
             {
                 bool[] LaptopLoading = { laptop.turboBoost_isLoad() };
@@ -82,12 +82,12 @@ namespace ProjetClass
             Console.WriteLine("Laptop : " + laptop.getVie());
             Console.WriteLine("Laptop1 : " + laptop1.getVie());
 
-            laptop = new Laptop("laptop");
+            laptop = new Laptop("laptop");*/
             #endregion
-            Console.WriteLine();
+            //Console.WriteLine();
 
             #region Computer/Computer
-
+/*
             while (computer.isAlive() && computer1.isAlive())
             {
                 bool[] ComputerLoading = { computer.failureSytem_Isload() };
@@ -146,12 +146,12 @@ namespace ProjetClass
             Console.WriteLine("computer : " + computer.getVie());
             Console.WriteLine("Computer1 : " + computer1.getVie());
 
-            computer = new Computer("Computer");
+            computer = new Computer("Computer");*/
             #endregion
-            Console.WriteLine();
+            //Console.WriteLine();
 
             #region Serveur/Serveur
-
+/*
             while (serveur.isAlive() && serveur1.isAlive())
             {
                 bool[] ServerLoading = { serveur.firewall_Isload(), serveur.ddos_Isload() };
@@ -221,10 +221,9 @@ namespace ProjetClass
             Console.WriteLine("Seveur : " + serveur.getVie());
             Console.WriteLine("Serveur1 : " + serveur1.getVie());
 
-            serveur = new Server("Serveur");
+            serveur = new Server("Serveur");*/
             #endregion
-            Console.WriteLine();
-
+            //Console.WriteLine();
 
             #region Serveur/Computer
 

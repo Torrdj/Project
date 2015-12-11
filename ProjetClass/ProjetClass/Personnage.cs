@@ -27,7 +27,6 @@ namespace ProjetClass
             m_vitesseAtt = 1.0f;
         }
 
-
         public bool IsLoad()
         {
             return load;

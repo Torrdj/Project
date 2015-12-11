@@ -18,7 +18,6 @@ namespace ProjetClass
             m_attaque *= 0.9f;
         }
 
-
         #region Attaque TurboBoost
         public bool turboBoost_isLoad()
         {

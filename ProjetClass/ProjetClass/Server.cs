@@ -19,7 +19,6 @@ namespace ProjetClass
             m_vitesseAtt *= 1.25f;
         }
 
-
         #region Attaque DDOS
         public bool ddos_Isload()
         {
@@ -71,6 +70,5 @@ namespace ProjetClass
             }).Start();
         }
         #endregion
-
     }
 }
