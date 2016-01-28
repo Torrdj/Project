@@ -227,12 +227,12 @@ namespace ProjetClass
 
             #region Serveur/Computer
 
-            while (serveur.isAlive() && computer.isAlive())
+            while (serveur.isAlive && computer.isAlive)
             {
                 bool[] ServerLoading = { serveur.firewall_Isload(), serveur.ddos_Isload() };
                 bool[] ComputerLoading = { computer.failureSytem_Isload() };
 
-                if (serveur.IsLoad() && !serveur.IsParalysed())
+                if (serveur.IsLoad && !serveur.IsParalysed)
                 {
                     int i = 0;
                     bool hadAttaque = false;
@@ -257,10 +257,10 @@ namespace ProjetClass
                         }
                     }
                     if (!hadAttaque)
-                        serveur.attaque(computer, serveur.coupDeMolette());
+                        serveur.attaque(computer, serveur.coupDeMolette);
                 }
 
-                if (computer.IsLoad() && !computer.IsParalysed())
+                if (computer.IsLoad && !computer.IsParalysed)
                 {
                     int i = 0;
                     bool hadAttaque = false;
@@ -281,12 +281,12 @@ namespace ProjetClass
                         }
                     }
                     if (!hadAttaque)
-                        computer.attaque(serveur, computer.coupDeMolette());
+                        computer.attaque(serveur, computer.coupDeMolette);
                 }
             }
 
-            Console.WriteLine("serveur : " + serveur.getVie());
-            Console.WriteLine("Computer : " + computer.getVie());
+            Console.WriteLine("serveur : " + serveur.getVie);
+            Console.WriteLine("Computer : " + computer.getVie);
             serveur = new Server("Serveur");
             computer = new Computer("Computer");
 
@@ -294,12 +294,12 @@ namespace ProjetClass
             Console.WriteLine();
 
             #region Server/laptop
-            while (serveur.isAlive() && laptop.isAlive())
+            while (serveur.isAlive && laptop.isAlive)
             {
                 bool[] ServerLoading = { serveur.firewall_Isload(), serveur.ddos_Isload() };
                 bool[] LaptopLoading = { laptop.turboBoost_isLoad() };
 
-                if (serveur.IsLoad() && !serveur.IsParalysed())
+                if (serveur.IsLoad && !serveur.IsParalysed)
                 {
                     int i = 0;
                     bool hadAttaque = false;
@@ -324,10 +324,10 @@ namespace ProjetClass
                         }
                     }
                     if (!hadAttaque)
-                        serveur.attaque(laptop, serveur.coupDeMolette());
+                        serveur.attaque(laptop, serveur.coupDeMolette);
                 }
 
-                if (laptop.IsLoad() && !laptop.IsParalysed())
+                if (laptop.IsLoad && !laptop.IsParalysed)
                 {
                     int i = 0;
                     bool hadAttaque = false;
@@ -348,12 +348,12 @@ namespace ProjetClass
                         }
                     }
                     if (!hadAttaque)
-                        laptop.attaque(serveur, laptop.coupDeMolette());
+                        laptop.attaque(serveur, laptop.coupDeMolette);
                 }
             }
 
-            Console.WriteLine("serveur : " + serveur.getVie());
-            Console.WriteLine("Laptop : " + laptop.getVie());
+            Console.WriteLine("serveur : " + serveur.getVie);
+            Console.WriteLine("Laptop : " + laptop.getVie);
             serveur = new Server("Serveur");
             laptop = new Laptop("Laptop");
 
@@ -361,12 +361,12 @@ namespace ProjetClass
             Console.WriteLine();
 
             #region Computer/laptop
-            while (laptop.isAlive() && computer.isAlive())
+            while (laptop.isAlive && computer.isAlive)
             {
                 bool[] LaptopLoading = { laptop.turboBoost_isLoad() };
                 bool[] ComputerLoading = { computer.failureSytem_Isload() };
 
-                if (laptop.IsLoad() && !laptop.IsParalysed())
+                if (laptop.IsLoad && !laptop.IsParalysed)
                 {
                     int i = 0;
                     bool hadAttaque = false;
@@ -387,10 +387,10 @@ namespace ProjetClass
                         }
                     }
                     if (!hadAttaque)
-                        laptop.attaque(computer, laptop.coupDeMolette());
+                        laptop.attaque(computer, laptop.coupDeMolette);
                 }
 
-                if (computer.IsLoad() && !computer.IsParalysed())
+                if (computer.IsLoad && !computer.IsParalysed)
                 {
                     int i = 0;
                     bool hadAttaque = false;
@@ -411,12 +411,12 @@ namespace ProjetClass
                         }
                     }
                     if (!hadAttaque)
-                        computer.attaque(laptop, computer.coupDeMolette());
+                        computer.attaque(laptop, computer.coupDeMolette);
                 }
             }
 
-            Console.WriteLine("Laptop : " + laptop.getVie());
-            Console.WriteLine("Computer : " + computer.getVie());
+            Console.WriteLine("Laptop : " + laptop.getVie);
+            Console.WriteLine("Computer : " + computer.getVie);
             laptop = new Laptop("Laptop");
             computer = new Computer("Computer");
             #endregion

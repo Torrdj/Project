@@ -26,17 +26,7 @@ namespace ProjetClass
             m_attaque = 50; m_defense = 20;
             m_vitesseAtt = 1.0f;
         }
-
-        public bool IsLoad()
-        {
-            return load;
-        }
-
-        public bool IsParalysed()
-        {
-            return m_isParalyzed;
-        }
-
+        
         public void attaque(Personnage cible, float damages)
         {
             cible.receiveDamages(damages);
@@ -60,39 +50,44 @@ namespace ProjetClass
                 m_vie = m_vieMax;
         }
 
-        public float coupDeMolette()
+        #region Getter/Setter
+        public bool IsLoad
         {
-            return m_attaque;
+            get { return load; }
         }
 
-        public bool isAlive()
+        public bool IsParalysed
         {
-            return m_vie > 0;
+            get { return m_isParalyzed; }
         }
 
-        public float getVie()
+        public float coupDeMolette
         {
-            return m_vie;
+           get { return m_attaque; }
         }
 
-        public float getMana()
+        public bool isAlive
         {
-            return m_mana;
+            get { return m_vie > 0; }
         }
 
-        public float getVitAtt()
+        public float getVie
         {
-            return m_vitesseAtt;
+            get { return m_vie; }
+            set { m_vie = value; }
         }
 
-        public void setVie(float vie)
+        public float getMana
         {
-            m_vie = vie;
+            get { return m_mana; }
+            set { m_mana = value; }
         }
 
-        public void setMana(float mana)
+        public float getVitAtt
         {
-            m_mana = mana;
+            get { return m_vitesseAtt; }
         }
+        #endregion
+        
     }
 }
