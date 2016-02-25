@@ -227,10 +227,10 @@ namespace ProjetClass
 
             #region Serveur/Computer
 
-            while (serveur.isAlive && computer.isAlive)
+            while (serveur.isAlive() && computer.isAlive())
             {
                 bool[] ServerLoading = { serveur.firewall_Isload(), serveur.ddos_Isload() };
-                bool[] ComputerLoading = { computer.failureSytem_Isload() };
+                bool[] ComputerLoading = { computer.failureSytem_Isload(), computer.trojan_isLoad() };
 
                 if (serveur.IsLoad && !serveur.IsParalysed)
                 {
@@ -276,6 +276,10 @@ namespace ProjetClass
                                     computer.failureSystem(serveur);
                                     hadAttaque = true;
                                     break;
+                                case 1:
+                                    computer.trojan(serveur);
+                                    hadAttaque = true;
+                                    break;
                             }
                             i++;
                         }
@@ -285,8 +289,8 @@ namespace ProjetClass
                 }
             }
 
-            Console.WriteLine("serveur : " + serveur.getVie);
-            Console.WriteLine("Computer : " + computer.getVie);
+            Console.WriteLine("serveur : " + serveur.Vie);
+            Console.WriteLine("Computer : " + computer.Vie);
             serveur = new Server("Serveur");
             computer = new Computer("Computer");
 
@@ -294,10 +298,10 @@ namespace ProjetClass
             Console.WriteLine();
 
             #region Server/laptop
-            while (serveur.isAlive && laptop.isAlive)
+            while (serveur.isAlive() && laptop.isAlive())
             {
                 bool[] ServerLoading = { serveur.firewall_Isload(), serveur.ddos_Isload() };
-                bool[] LaptopLoading = { laptop.turboBoost_isLoad() };
+                bool[] LaptopLoading = { laptop.turboBoost_isLoad(), laptop.spyware_isLoad() };
 
                 if (serveur.IsLoad && !serveur.IsParalysed)
                 {
@@ -343,6 +347,10 @@ namespace ProjetClass
                                     laptop.turboBoost();
                                     hadAttaque = true;
                                     break;
+                                case 1:
+                                    laptop.spyware(serveur);
+                                    hadAttaque = true;
+                                    break;
                             }
                             i++;
                         }
@@ -352,8 +360,8 @@ namespace ProjetClass
                 }
             }
 
-            Console.WriteLine("serveur : " + serveur.getVie);
-            Console.WriteLine("Laptop : " + laptop.getVie);
+            Console.WriteLine("serveur : " + serveur.Vie);
+            Console.WriteLine("Laptop : " + laptop.Vie);
             serveur = new Server("Serveur");
             laptop = new Laptop("Laptop");
 
@@ -361,10 +369,10 @@ namespace ProjetClass
             Console.WriteLine();
 
             #region Computer/laptop
-            while (laptop.isAlive && computer.isAlive)
+            while (laptop.isAlive() && computer.isAlive())
             {
-                bool[] LaptopLoading = { laptop.turboBoost_isLoad() };
-                bool[] ComputerLoading = { computer.failureSytem_Isload() };
+                bool[] LaptopLoading = { laptop.turboBoost_isLoad(), laptop.spyware_isLoad() };
+                bool[] ComputerLoading = { computer.failureSytem_Isload(), computer.trojan_isLoad() };
 
                 if (laptop.IsLoad && !laptop.IsParalysed)
                 {
@@ -380,6 +388,10 @@ namespace ProjetClass
                             {
                                 case 0:
                                     laptop.turboBoost();
+                                    hadAttaque = true;
+                                    break;
+                                case 1:
+                                    laptop.spyware(computer);
                                     hadAttaque = true;
                                     break;
                             }
@@ -406,6 +418,10 @@ namespace ProjetClass
                                     computer.failureSystem(laptop);
                                     hadAttaque = true;
                                     break;
+                                case 1:
+                                    computer.trojan(laptop);
+                                    hadAttaque = true;
+                                    break;
                             }
                             i++;
                         }
@@ -415,8 +431,8 @@ namespace ProjetClass
                 }
             }
 
-            Console.WriteLine("Laptop : " + laptop.getVie);
-            Console.WriteLine("Computer : " + computer.getVie);
+            Console.WriteLine("Laptop : " + laptop.Vie);
+            Console.WriteLine("Computer : " + computer.Vie);
             laptop = new Laptop("Laptop");
             computer = new Computer("Computer");
             #endregion

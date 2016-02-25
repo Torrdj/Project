@@ -49,6 +49,10 @@ namespace ProjetClass
             if (m_vie >= m_vieMax)
                 m_vie = m_vieMax;
         }
+        public bool isAlive()
+        {
+            return m_vie > 0;
+        }
 
         #region Getter/Setter
         public bool IsLoad
@@ -61,31 +65,34 @@ namespace ProjetClass
             get { return m_isParalyzed; }
         }
 
-        public float coupDeMolette
+        public float coupDeMolette//attaque de base ET getter
         {
            get { return m_attaque; }
         }
 
-        public bool isAlive
+        public float Defense
         {
-            get { return m_vie > 0; }
+            get { return m_defense; }
+            set { m_defense = value; }
         }
 
-        public float getVie
+
+        public float Vie
         {
             get { return m_vie; }
             set { m_vie = value; }
         }
 
-        public float getMana
+        public float Mana
         {
             get { return m_mana; }
             set { m_mana = value; }
         }
 
-        public float getVitAtt
+        public float VitAtt
         {
             get { return m_vitesseAtt; }
+            set { m_vitesseAtt = value; }
         }
         #endregion
         
