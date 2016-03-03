@@ -16,6 +16,7 @@ class Personnage
 class Server /// : Personnage
 {
     /*
+
         Vie max *= 1.5 -> 1500
         Defense *= 1.2 -> 24
         Vitesse d'Attaque *= 1.25 -> 1250 ms
