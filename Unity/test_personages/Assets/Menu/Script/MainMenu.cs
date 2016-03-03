@@ -3,11 +3,19 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 
-	public void OnGUI()
+    void OnGUI()
     {
-        if (GUI.Button(Rect.MinMaxRect(Screen.width/2 - 100, Screen.height/2 - 50, Screen.width/2 + 200, Screen.height/2 + 100), "Start"))
+        //taille par defaut des boutons
+        const int buttonWidth = 100;
+        const int buttonHeight = 50;
+
+        //bouton demarrage du jeu
+        if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (2 * Screen.height / 3) - (buttonHeight / 2), buttonWidth, buttonHeight), "Start"))
         {
             Application.LoadLevel("test0");
         }
+
+
+
     }
 }
