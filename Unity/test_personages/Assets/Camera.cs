@@ -67,7 +67,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
 
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
         }
 
         /**
@@ -88,7 +87,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
 
                 Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
             }
             //Reset the camera angle and Rotate the Target Around the World!
             else if (Input.GetMouseButton(1))
@@ -102,7 +100,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
 
                 Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
             }
 
             // otherwise, ease behind the target if any of the directional keys are pressed
