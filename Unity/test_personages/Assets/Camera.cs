@@ -65,6 +65,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 target.transform.Rotate(0, Input.GetAxis("Mouse X") * xSpeed * 0.02f, 0);
                 xDeg += Input.GetAxis("Mouse X") * targetSpeed * 0.02f;
             }
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         /**
@@ -83,6 +86,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
                 yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
             }
             //Reset the camera angle and Rotate the Target Around the World!
             else if (Input.GetMouseButton(1))
@@ -94,8 +100,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
 
                 yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
-            }
 
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
 
             // otherwise, ease behind the target if any of the directional keys are pressed
             else if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
@@ -106,7 +114,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
 
             yDeg = ClampAngle(yDeg, yMinLimit, yMaxLimit);
-
 
             // set camera rotation
             Quaternion rotation = Quaternion.Euler(yDeg, xDeg, 0);
