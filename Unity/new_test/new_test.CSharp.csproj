@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Server.cs" />
     <Compile Include="Assets\Scripts\StartNetwork.cs" />
     <Compile Include="Assets\Scripts\menu0.cs" />
+    <Compile Include="Assets\Scripts\move.cs" />
     <Compile Include="Assets\Scripts\programme.cs" />
     <Compile Include="Assets\Scripts\spawner.cs" />
     <Compile Include="Assets\Scripts\to1.cs" />

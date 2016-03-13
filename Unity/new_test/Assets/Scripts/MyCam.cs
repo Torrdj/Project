@@ -4,7 +4,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
-    [RequireComponent(typeof(ThirdPersonCharacter))]
+    //[RequireComponent(typeof(ThirdPersonCharacter))]
     public class MyCam : MonoBehaviour
     {
         public Transform target;
