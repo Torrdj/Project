@@ -1,7 +1,13 @@
 body
 {
+    font-family: Verdana, serif, sans-serif;
     width:100%;
     margin: auto;
+}
+
+head
+{
+    font-family: Verdana, serif, sans-serif;
 }
 
 .container
@@ -14,13 +20,14 @@ body
 
 .header
 {
+    font-family: Verdana, serif, sans-serif;
     background: dimgray;
     width:100%;
     top:0;
     position:fixed;
 }
 
-a
+.nav a
 {
     text-decoration: none;
     color:black;
@@ -42,7 +49,7 @@ a
     text-decoration: underline;
 }
 
-ul li
+.nav ul li
 {
     list-style: none;
     text-transform: uppercase;
@@ -57,4 +64,25 @@ ul li
 .current_page
 {
     color:whitesmoke;
+}
+
+.dlink
+{
+    text-decoration: none;
+    color:darkgreen;
+}
+
+.dlink:hover
+{
+    text-decoration: underline;
+}
+
+.text h1
+{
+    font-size: 1.3em;
+}
+
+.text li
+{
+    font-weight: bold;
 }
