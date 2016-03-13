@@ -20,11 +20,19 @@ head
 
 .header
 {
-    font-family: Verdana, serif, sans-serif;
     background: dimgray;
     width:100%;
     top:0;
     position:fixed;
+}
+
+.nav
+{
+    font-family: Verdana, serif, sans-serif;
+    float: left;
+    font-family:monospace;
+    font-size: 1.2em;
+    padding-bottom: 10px;
 }
 
 .nav a
@@ -33,15 +41,6 @@ head
     color:black;
     text-transform: uppercase;
 }
-
-.nav
-{
-    float: left;
-    font-family:monospace;
-    font-size: 1.2em;
-    padding-bottom: 10px;
-}
-
 
 .nav a:hover
 {
