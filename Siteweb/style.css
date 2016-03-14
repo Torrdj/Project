@@ -12,10 +12,21 @@ head
 
 .container
 {
+    background-color:floralwhite;
+    border-left: 2px ridge grey;
+    border-right: 2px ridge grey;
+    border-bottom: 2px ridge grey;
+    padding: 12px;
     width : 960px;
     margin : 0 auto;
     text-align: justify;
+}
+
+.text
+{
     margin-top: 70px;
+    width : 960px;
+    text-align: justify;
 }
 
 .header
@@ -24,6 +35,8 @@ head
     width:100%;
     top:0;
     position:fixed;
+    border-bottom: 2px outset dimgray;
+    border-top: 2px inset dimgray;
 }
 
 .nav
@@ -85,3 +98,4 @@ head
 {
     font-weight: bold;
 }
+
