@@ -35,6 +35,11 @@ head
     color: black;
 }
 
+.text a:hover
+{
+    text-decoration: underline;
+}
+
 .header
 {
     background: dimgray;
@@ -82,6 +87,11 @@ head
 .current_page
 {
     color:whitesmoke;
+}
+
+.download
+{
+    margin-top: 70px;
 }
 
 .dlink
