@@ -74,14 +74,18 @@
     <Compile Include="Assets\Scripts\MyCam.cs" />
     <Compile Include="Assets\Scripts\Personnage.cs" />
     <Compile Include="Assets\Scripts\Server.cs" />
+    <Compile Include="Assets\Scripts\SpawnInFirst.cs" />
     <Compile Include="Assets\Scripts\StartNetwork.cs" />
     <Compile Include="Assets\Scripts\menu0.cs" />
     <Compile Include="Assets\Scripts\move.cs" />
     <Compile Include="Assets\Scripts\programme.cs" />
     <Compile Include="Assets\Scripts\spawner.cs" />
+    <Compile Include="Assets\Scripts\to0.cs" />
     <Compile Include="Assets\Scripts\to1.cs" />
+    <Compile Include="Assets\Scripts\toFirst.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\SCI-FI\Origin\Tools\Self_illum_reflective.shader" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class spawner : MonoBehaviour
+public class SpawnInFirst : MonoBehaviour
 {
     public GameObject perso;
 
@@ -9,11 +9,11 @@ public class spawner : MonoBehaviour
     {
         if (Network.isClient || Network.isServer)
         {
-            Network.Instantiate(perso, new Vector3(35, 0.13f, 11.6f), new Quaternion(), 0);
+            Network.Instantiate(perso, new Vector3(-4, 0f, -48.8f), new Quaternion(), 0);
         }
         else
         {
-            Instantiate(perso, new Vector3(35, 0.13f, 11.6f), Quaternion.identity);
+            Instantiate(perso, new Vector3(-4, 0f, -48.8f), Quaternion.identity);
         }
     }
 

@@ -20,7 +20,7 @@ public class StartNetwork : MonoBehaviour
 
         if (server)
         {
-            Network.InitializeServer(32, listenPort, !Network.HavePublicAddress()); //le false signifie qu'on utilise pas le Nat punchtrough. Je vous recommande la doc d'Unity pour en savoir plus
+            Network.InitializeServer(32, listenPort, !Network.HavePublicAddress());
 
             // On préviens tous nos objets que le réseau est lancé
             foreach (var go in FindObjectsOfType<GameObject>())
