@@ -1,0 +1,35 @@
+Initialize engine version: 5.3.2f1 (e87ab445ead0)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 660   (ID=0x11c0)
+    Vendor:   NVIDIA
+    VRAM:     1988 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: F:\Mes documents\Informatique\Project\Unity\new_test\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading F:\Mes documents\Informatique\Project\Unity\new_test\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: F:\Mes documents\Informatique\Project\Unity\new_test\test_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading F:\Mes documents\Informatique\Project\Unity\new_test\test_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: F:\Mes documents\Informatique\Project\Unity\new_test\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading F:\Mes documents\Informatique\Project\Unity\new_test\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: F:\Mes documents\Informatique\Project\Unity\new_test\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading F:\Mes documents\Informatique\Project\Unity\new_test\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: F:\Mes documents\Informatique\Project\Unity\new_test\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading F:\Mes documents\Informatique\Project\Unity\new_test\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.111 seconds
+Platform assembly: F:\Mes documents\Informatique\Project\Unity\new_test\test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: F:\Mes documents\Informatique\Project\Unity\new_test\test_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 30Hz; virtual: 3840x1080 at -1920,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.019287 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1d74 -> priority: 1 
+  Thread -> id: 26bc -> priority: 1 
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.405168 ms
+
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 3032.
+Total: 0.408766 ms (FindLiveObjects: 0.083856 ms CreateObjectMapping: 0.040959 ms MarkObjects: 0.261809 ms  DeleteObjects: 0.021863 ms)
+
