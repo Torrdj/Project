@@ -91,7 +91,6 @@
     <Compile Include="Assets\Scripts\toFirst.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\SCI-FI\Origin\Tools\Self_illum_reflective.shader" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
