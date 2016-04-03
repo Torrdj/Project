@@ -19,6 +19,10 @@ public class menu0 : MonoBehaviour
     private bool menu4 = false;
     private int tourner = 1;
 
+    //rotation camera
+    Quaternion rot;
+    float speed = 1.0f;
+
     // Use this for initialization
     void OnGUI()
     {
@@ -27,10 +31,6 @@ public class menu0 : MonoBehaviour
         //taille par defaut des boutons
         const int buttonWidth = 100;
         const int buttonHeight = 50;
-
-        //rotation camera
-        Quaternion rot;
-        float speed = 0.5f;
 
         //Application.LoadLevel("test0");
         //SceneManager.LoadScene("first");
