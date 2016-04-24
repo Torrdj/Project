@@ -1,0 +1,117 @@
+body
+{
+    font-family: Verdana, serif, sans-serif;
+    width:100%;
+    margin: auto;
+}
+
+head
+{
+    font-family: Verdana, serif, sans-serif;
+}
+
+.container
+{
+    background-color: darkgrey;
+    border-left: 2px ridge grey;
+    border-right: 2px ridge grey;
+    border-bottom: 2px ridge grey;
+    padding: 12px;
+    width : 960px;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+.text
+{
+    margin-top: 70px;
+    width : 960px;
+    text-align: justify;
+}
+
+.text a
+{
+    text-decoration: none;
+    color: black;
+}
+
+.text a:hover
+{
+    text-decoration: underline;
+}
+
+.header
+{
+    background: dimgray;
+    width:100%;
+    top:0;
+    position:fixed;
+    border-bottom: 2px outset dimgray;
+    border-top: 2px inset dimgray;
+}
+
+.nav
+{
+    font-family: Verdana, serif, sans-serif;
+    float: left;
+    font-family:monospace;
+    font-size: 1.2em;
+    padding-bottom: 10px;
+}
+
+.nav a
+{
+    text-decoration: none;
+    color:black;
+    text-transform: uppercase;
+}
+
+.nav a:hover
+{
+    color: dodgerblue;
+    text-decoration: underline;
+}
+
+.nav ul li
+{
+    list-style: none;
+    text-transform: uppercase;
+    font-family:monospace;
+    font-size: 1.2em;
+    float: left;
+    margin-left: 15px;
+    padding-top: 4px;
+    padding-bottom: 5px;
+}
+
+.current_page
+{
+    color: whitesmoke;
+}
+
+.download
+{
+    margin-top: 70px;
+}
+
+.dlink
+{
+    text-decoration: none;
+    color: blue;
+}
+
+.dlink:hover
+{
+    text-decoration: underline;
+}
+
+.text h1
+{
+    font-size: 1.3em;
+}
+
+.text li
+{
+    font-weight: bold;
+}
+
