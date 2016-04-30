@@ -97,8 +97,7 @@ public class camera_move : MonoBehaviour {
             target.transform.Rotate(0, Input.GetAxis("Mouse X") * xSpeed * 0.02f, 0);
             xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
             yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
-
-            buttonDown = true;
+            
             Cursor.visible = false;
         }
 
