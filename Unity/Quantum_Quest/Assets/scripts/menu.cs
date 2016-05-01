@@ -19,10 +19,10 @@ public class menu : MonoBehaviour
         "\nLa classe Laptop correspond aux DPS \"légers\". Ils ont moins de vie que les autres classes, mais foudroient leurs ennemis en enchaînant les attaques à la même vitesse que l'électricité parcourt leurs circuits.";
     private int i = 0;
     public Image FondTexte;
-    public Image Bodder;
 
     //personnage
     public List<GameObject> ListePersonnage = new List<GameObject>();
+    public List<GameObject> networkPlayer = new List<GameObject>();
 
     //button
     public GUIStyle GuiButton;
@@ -39,6 +39,10 @@ public class menu : MonoBehaviour
     //rotation camera
     Quaternion rot;
     float speed = 1.0f;
+
+    //network
+    public NetworkManager network;
+
 
     // Use this for initialization
     void OnGUI()
@@ -109,8 +113,6 @@ public class menu : MonoBehaviour
                 Titre.text = "Choix des Personnages";
                 FondTexte.enabled = true;
                 DescriptionPersonnage.enabled = true;
-                Bodder.enabled = true;
-                Bodder.transform.position = new Vector2(Screen.width - (225), Screen.height / 2 - 25);
                 FondTexte.transform.position = new Vector2(Screen.width - (225), Screen.height / 2 - 25);
                 DescriptionPersonnage.transform.position = new Vector2(Screen.width - (225), Screen.height / 2 - 25);
                 //actualisation Description Personnage
@@ -138,7 +140,6 @@ public class menu : MonoBehaviour
                     Titre.enabled = false;
                     foreach(GameObject x in ListePersonnage)
                         x.SetActive(false);
-                    Bodder.enabled = false;
                     FondTexte.enabled = false;
                     DescriptionPersonnage.enabled = false;
                     menu2 = false;
@@ -150,7 +151,6 @@ public class menu : MonoBehaviour
                     Titre.enabled = false;
                     foreach (GameObject x in ListePersonnage)
                         x.SetActive(false);
-                    Bodder.enabled = false;
                     FondTexte.enabled = false;
                     DescriptionPersonnage.enabled = false;
                     menu2 = false;
@@ -179,6 +179,7 @@ public class menu : MonoBehaviour
             }
             else
             {
+                network.playerPrefab = networkPlayer[i];
                 Titre.enabled = true;
                 Titre.text = "Serveur";
                 NetworkManagerHUD ntHUD = FindObjectOfType<NetworkManagerHUD>();
