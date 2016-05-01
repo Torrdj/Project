@@ -19,9 +19,11 @@ public class menu0 : MonoBehaviour
     private bool menu4 = false;
     private int tourner = 1;
 
+    public Texture TextureButton;
+
     //rotation camera
     Quaternion rot;
-    float speed = 1.0f;
+    public float speed = 1.0f;
 
     // Use this for initialization
     void OnGUI()
