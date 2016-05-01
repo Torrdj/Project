@@ -18,9 +18,14 @@ public class menu : MonoBehaviour
         "\nLes Laptops, petits derniers de l'industrie des ordinateurs encore présents aujourd'hui, représentent les \"blonds\" des Intelligences Artificielles.Toujours plus fins et plus rapides, ils tailladent leurs ennemis, ne se souciant que d'eux même.\n" +
         "\nLa classe Laptop correspond aux DPS \"légers\". Ils ont moins de vie que les autres classes, mais foudroient leurs ennemis en enchaînant les attaques à la même vitesse que l'électricité parcourt leurs circuits.";
     private int i = 0;
+    public Image FondTexte;
+    public Image Bodder;
 
     //personnage
     public List<GameObject> ListePersonnage = new List<GameObject>();
+
+    //button
+    public GUIStyle GuiButton;
 
     private bool menu1 = true;
     private bool menu2 = false;
@@ -29,6 +34,7 @@ public class menu : MonoBehaviour
     private int tourner = 1;
     
     public Text DescriptionPersonnage;
+    public Text Titre;
 
     //rotation camera
     Quaternion rot;
@@ -61,17 +67,20 @@ public class menu : MonoBehaviour
             }
             else
             {
-                if (GUI.Button(new Rect(Screen.width / 2 - ((buttonWidth + 50) / 2), (2 * Screen.height / 5) - (buttonHeight / 2), buttonWidth + 50, buttonHeight), "Nouveau personnage"))
+                Titre.enabled = true;
+                Titre.text = "Quantum Quest";
+                if (GUI.Button(new Rect(Screen.width / 2 - ((buttonWidth + 50) / 2), (2 * Screen.height / 5) - (buttonHeight / 2), buttonWidth + 50, buttonHeight), "Nouveau personnage", GuiButton))
                 {
+                    Titre.enabled = false;
                     menu1 = false;
                     menu2 = true;
                     tourner = 1;
                 }
-                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (3 * Screen.height / 5) - (buttonHeight / 2), buttonWidth, buttonHeight), "Charger"))
+                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (3 * Screen.height / 5) - (buttonHeight / 2), buttonWidth, buttonHeight), "Charger", GuiButton))
                 {
 
                 }
-                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (4 * Screen.height / 5) - (buttonHeight / 2), buttonWidth, buttonHeight), "Quitter"))
+                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (4 * Screen.height / 5) - (buttonHeight / 2), buttonWidth, buttonHeight), "Quitter", GuiButton))
                 {
                     //fermeture tu jeu
                 }
@@ -96,9 +105,14 @@ public class menu : MonoBehaviour
             }
             else
             {
-                
+                Titre.enabled = true;
+                Titre.text = "Choix des Personnages";
+                FondTexte.enabled = true;
                 DescriptionPersonnage.enabled = true;
-                DescriptionPersonnage.transform.position = new Vector2(Screen.width - (225), Screen.height / 5);
+                Bodder.enabled = true;
+                Bodder.transform.position = new Vector2(Screen.width - (225), Screen.height / 2 - 25);
+                FondTexte.transform.position = new Vector2(Screen.width - (225), Screen.height / 2 - 25);
+                DescriptionPersonnage.transform.position = new Vector2(Screen.width - (225), Screen.height / 2 - 25);
                 //actualisation Description Personnage
                 switch (i)
                 {
@@ -119,30 +133,33 @@ public class menu : MonoBehaviour
                         break;
                 }
                 
-                if (GUI.Button(new Rect((Screen.width - 200) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Valider"))
+                if (GUI.Button(new Rect((Screen.width - 200) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Valider", GuiButton))
                 {
+                    Titre.enabled = false;
                     ListePersonnage[0].SetActive(false);
                     //foreach(GameObject x in ListePersonnage)
                     //    x.SetActive(false);
-
+                    Bodder.enabled = false;
+                    FondTexte.enabled = false;
                     DescriptionPersonnage.enabled = false;
                     menu2 = false;
                     menu3 = true;
                     tourner = 1;
                 }
-                if (GUI.Button(new Rect((Screen.width - 75)  - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour"))
+                if (GUI.Button(new Rect((Screen.width - 75)  - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
                 {
+                    Titre.enabled = false;
                     ListePersonnage[0].SetActive(false);
                     //foreach (GameObject x in ListePersonnage)
                     //    x.SetActive(false);
-
-
+                    Bodder.enabled = false;
+                    FondTexte.enabled = false;
                     DescriptionPersonnage.enabled = false;
                     menu2 = false;
                     menu1 = true;
                     tourner = -1;
                 }
-                if (GUI.Button(new Rect(75 - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Changer"))
+                if (GUI.Button(new Rect(75 - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Changer", GuiButton))
                 {
                     i += 1;
                     i = i % 3;
@@ -164,11 +181,14 @@ public class menu : MonoBehaviour
             }
             else
             {
+                Titre.enabled = true;
+                Titre.text = "Serveur";
                 NetworkManagerHUD ntHUD = FindObjectOfType<NetworkManagerHUD>();
                 ntHUD.enabled = true;
 
-                if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour"))
+                if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
                 {
+                    Titre.enabled = false;
                     ntHUD.enabled = false;
                     menu3 = false;
                     menu2 = true;
