@@ -117,18 +117,18 @@ public class menu : MonoBehaviour
                 switch (i)
                 {
                     case 0:
-                        //ListePersonnage[2].SetActive(false);
+                        ListePersonnage[2].SetActive(false);
                         ListePersonnage[0].SetActive(true);
                         DescriptionPersonnage.text = Laptop;
                         break;
                     case 1:
                         ListePersonnage[0].SetActive(false);
-                        //ListePersonnage[1].SetActive(true);
+                        ListePersonnage[1].SetActive(true);
                         DescriptionPersonnage.text = Computer;
                         break;
                     case 2:
-                        //ListePersonnage[1].SetActive(false);
-                        //ListePersonnage[2].SetActive(true);
+                        ListePersonnage[1].SetActive(false);
+                        ListePersonnage[2].SetActive(true);
                         DescriptionPersonnage.text = Server;
                         break;
                 }
@@ -136,9 +136,8 @@ public class menu : MonoBehaviour
                 if (GUI.Button(new Rect((Screen.width - 200) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Valider", GuiButton))
                 {
                     Titre.enabled = false;
-                    ListePersonnage[0].SetActive(false);
-                    //foreach(GameObject x in ListePersonnage)
-                    //    x.SetActive(false);
+                    foreach(GameObject x in ListePersonnage)
+                        x.SetActive(false);
                     Bodder.enabled = false;
                     FondTexte.enabled = false;
                     DescriptionPersonnage.enabled = false;
@@ -149,9 +148,8 @@ public class menu : MonoBehaviour
                 if (GUI.Button(new Rect((Screen.width - 75)  - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
                 {
                     Titre.enabled = false;
-                    ListePersonnage[0].SetActive(false);
-                    //foreach (GameObject x in ListePersonnage)
-                    //    x.SetActive(false);
+                    foreach (GameObject x in ListePersonnage)
+                        x.SetActive(false);
                     Bodder.enabled = false;
                     FondTexte.enabled = false;
                     DescriptionPersonnage.enabled = false;
