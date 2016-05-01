@@ -77,12 +77,11 @@
   <ItemGroup>
     <Compile Include="Assets\scripts\Movements.cs" />
     <Compile Include="Assets\scripts\Personnage.cs" />
-    <Compile Include="Assets\scripts\StartNetwork.cs" />
     <Compile Include="Assets\scripts\camera_move.cs" />
     <Compile Include="Assets\scripts\menu.cs" />
-    <Compile Include="Assets\scripts\menu0.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\SCI-FI\Origin\Tools\Self_illum_reflective.shader" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
   </ItemGroup>
