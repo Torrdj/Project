@@ -64,6 +64,12 @@ public class Personnage : NetworkBehaviour
         {
             pv.text = "PV : " + m_vie + " / " + m_vieMax;
             pvBtrsf.sizeDelta = new Vector2(m_vie / m_vieMax * 300, 10);
+
+            if (Input.GetKey(KeyCode.I))
+            {
+                GameObject.FindObjectOfType<InventoryManager>().ToogleInventory();
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 RaycastHit hit;
@@ -87,6 +93,7 @@ public class Personnage : NetworkBehaviour
                         pvBarre_e2.enabled = false;
                     }
                 }
+
             }
 
             if (cible != null)
@@ -97,13 +104,9 @@ public class Personnage : NetworkBehaviour
 
             if (posCible != new Vector3(0, -100, 0))
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKey(KeyCode.Alpha1))
                 {
                     CmdTellMyShotToTheServer(posCible);
-                }
-                if (Input.GetKeyDown(KeyCode.Alpha1))
-                {
-
                 }
             }
         }
