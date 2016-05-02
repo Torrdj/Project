@@ -19,6 +19,7 @@ public class Personnage : NetworkBehaviour
     protected bool m_isParalyzed = false;
 
     protected bool load = true;
+    public bool dead = false;
 
     Text pv, pv_e;
     Image pvBarre, pvBarre_e, pvBarre_e2;
@@ -93,7 +94,6 @@ public class Personnage : NetworkBehaviour
                         pvBarre_e2.enabled = false;
                     }
                 }
-
             }
 
             if (cible != null)
@@ -104,10 +104,14 @@ public class Personnage : NetworkBehaviour
 
             if (posCible != new Vector3(0, -100, 0))
             {
-                if (Input.GetKey(KeyCode.Alpha1))
+                if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
                     CmdTellMyShotToTheServer(posCible);
                 }
+            }
+            if (m_vie == 0)
+            {
+                dead = true;
             }
         }
     }

@@ -50,7 +50,7 @@ public class Movements : NetworkBehaviour
 
     void FixedUpdate()
     {
-        if (isLocalPlayer)
+        if (isLocalPlayer && !gameObject.GetComponent<Personnage>().dead)
         {
             if (camera_move.buttonDown)
             {
