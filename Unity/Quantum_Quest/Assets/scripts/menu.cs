@@ -42,12 +42,18 @@ public class menu : MonoBehaviour
 
     //network
     public NetworkManager network;
+    NetworkManagerHUD ntHUD;
 
+    void Start()
+    {
+        Cursor.visible = true;
+        ntHUD = FindObjectOfType<NetworkManagerHUD>();
+        ntHUD.enabled = false;
+    }
 
     // Use this for initialization
     void OnGUI()
     {
-
         //int sizeButtonX = 250;
 
         //taille par defaut des boutons
@@ -137,6 +143,7 @@ public class menu : MonoBehaviour
                 
                 if (GUI.Button(new Rect((Screen.width - 200) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Valider", GuiButton))
                 {
+                    network.playerPrefab = networkPlayer[i];
                     Titre.enabled = false;
                     foreach(GameObject x in ListePersonnage)
                         x.SetActive(false);
@@ -179,10 +186,8 @@ public class menu : MonoBehaviour
             }
             else
             {
-                network.playerPrefab = networkPlayer[i];
                 Titre.enabled = true;
                 Titre.text = "Serveur";
-                NetworkManagerHUD ntHUD = FindObjectOfType<NetworkManagerHUD>();
                 ntHUD.enabled = true;
 
                 if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))

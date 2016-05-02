@@ -52,7 +52,6 @@ public class camera_move : MonoBehaviour {
 
     void Update()
     {
-
         //Move the Player with left & right button press together
         if (Input.GetMouseButton(1) && Input.GetMouseButton(0))
         {
