@@ -189,6 +189,8 @@ public class menu : MonoBehaviour
                 Titre.enabled = true;
                 Titre.text = "Serveur";
                 ntHUD.enabled = true;
+                ntHUD.offsetX = Screen.width / 2 - 100;
+                ntHUD.offsetY = Screen.height / 3;
 
                 if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
                 {

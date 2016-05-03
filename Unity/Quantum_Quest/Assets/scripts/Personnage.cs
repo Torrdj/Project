@@ -133,6 +133,7 @@ public class Personnage : NetworkBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, posTarget, Quaternion.identity) as GameObject;
         NetworkServer.Spawn(bullet);
+        this.gameObject.GetComponent<AudioSource>().Play();
     }
     #endregion
 
