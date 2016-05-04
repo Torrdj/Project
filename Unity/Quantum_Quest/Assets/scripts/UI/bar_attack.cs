@@ -11,8 +11,9 @@ public class bar_attack : MonoBehaviour {
     public int buttonWidth;
     public int buttonHeight;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start ()
+    {
     }
 
     
@@ -27,6 +28,10 @@ public class bar_attack : MonoBehaviour {
 
     void OnGUI ()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+
+        }
         if (GUI.Button(new Rect((Screen.width / 2) - 297.5f, Screen.height - 50, buttonWidth, buttonHeight), "", style_buttons[0]))
         {
 

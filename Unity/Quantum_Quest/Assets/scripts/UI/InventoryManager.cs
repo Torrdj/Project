@@ -15,7 +15,7 @@ public class InventoryManager : MonoBehaviour {
 	
 	}
 
-    public void ToogleInventory()
+    public void ToogleInventory(bool playSound)
     {
         if (gameObject.GetComponent<Image>().enabled)
         {
@@ -24,6 +24,8 @@ public class InventoryManager : MonoBehaviour {
         }
         else
         {
+            if(playSound)
+                GetComponent<AudioSource>().Play();
             gameObject.GetComponent<Image>().enabled = true;
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }

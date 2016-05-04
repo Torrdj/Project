@@ -25,6 +25,7 @@ public class Personnage : NetworkBehaviour
     Image pvBarre, pvBarre_e, pvBarre_e2;
     RectTransform pvBtrsf, pvBtrsf_e;
 
+    Transform ennemy;
     Personnage cible;
     Vector3 posCible;
 
@@ -35,40 +36,46 @@ public class Personnage : NetworkBehaviour
         m_attaque = 50; m_defense = 20;
         m_vitesseAtt = 1.0f;
 
-        posCible = new Vector3(0, -10, 0);
-
-        if (isLocalPlayer)
+        if (tag == "Player")
         {
-            tag = "Player";
+            posCible = new Vector3(0, -10, 0);
 
-            pv = GameObject.Find("PV").GetComponent<Text>();
-            pvBarre = GameObject.Find("healthBar").GetComponent<Image>();
-            pvBtrsf = pvBarre.GetComponent<RectTransform>();
+            if (isLocalPlayer)
+            {
+                tag = "Player";
 
-            pv_e = GameObject.Find("PV_Ennemi").GetComponent<Text>();
-            pvBarre_e = GameObject.Find("healthBar_e").GetComponent<Image>();
-            pvBarre_e2 = GameObject.Find("healthBar_e (1)").GetComponent<Image>();
-            pvBtrsf_e = pvBarre_e.GetComponent<RectTransform>();
-            pv_e.enabled = false;
-            pvBarre_e.enabled = false;
-            pvBarre_e2.enabled = false;
-        }
-        else
-        {
-            tag = "Ennemi";
+                pv = GameObject.Find("PV").GetComponent<Text>();
+                pvBarre = GameObject.Find("healthBar").GetComponent<Image>();
+                pvBtrsf = pvBarre.GetComponent<RectTransform>();
+
+                pv_e = GameObject.Find("PV_Ennemi").GetComponent<Text>();
+                pvBarre_e = GameObject.Find("healthBar_e").GetComponent<Image>();
+                pvBarre_e2 = GameObject.Find("healthBar_e (1)").GetComponent<Image>();
+                pvBtrsf_e = pvBarre_e.GetComponent<RectTransform>();
+                pv_e.enabled = false;
+                pvBarre_e.enabled = false;
+                pvBarre_e2.enabled = false;
+            }
+            else
+            {
+                /*
+                foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
+                    go.tag = "Ennemi";*/
+                tag = "Ennemi";
+            }
         }
     }
 
     void FixedUpdate()
     {
-        if (isLocalPlayer)
+        if (tag == "Player")
         {
             pv.text = "PV : " + m_vie + " / " + m_vieMax;
             pvBtrsf.sizeDelta = new Vector2(m_vie / m_vieMax * 300, 10);
 
             if (Input.GetKey(KeyCode.I))
             {
-                GameObject.FindObjectOfType<InventoryManager>().ToogleInventory();
+                GameObject.FindObjectOfType<InventoryManager>().ToogleInventory(true);
             }
 
             if (Input.GetMouseButtonDown(0))
@@ -79,6 +86,7 @@ public class Personnage : NetworkBehaviour
                 {
                     if (hit.transform.CompareTag("Ennemi"))
                     {
+                        ennemy = hit.transform;
                         cible = hit.transform.GetComponent<Personnage>();
                         posCible = hit.transform.position;
                         pv_e.enabled = true;
@@ -87,6 +95,7 @@ public class Personnage : NetworkBehaviour
                     }
                     else
                     {
+                        ennemy = null;
                         cible = null;
                         posCible = new Vector3(0, -100, 0);
                         pv_e.enabled = false;
@@ -100,6 +109,8 @@ public class Personnage : NetworkBehaviour
             {
                 pv_e.text = "PV Ennemi : " + cible.Vie + "/" + cible.VieMax;
                 pvBtrsf_e.sizeDelta = new Vector2(cible.Vie / cible.VieMax * 300, 10);
+
+                posCible = ennemy.position;
             }
 
             if (posCible != new Vector3(0, -100, 0))
@@ -112,6 +123,13 @@ public class Personnage : NetworkBehaviour
             if (m_vie == 0)
             {
                 dead = true;
+            }
+        }
+        else
+        {
+            if(this.gameObject.layer == LayerMask.NameToLayer("Ennemis"))
+            {
+
             }
         }
     }

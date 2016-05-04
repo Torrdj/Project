@@ -7,8 +7,8 @@ public class Global : MonoBehaviour {
 
     void Start()
     {
-        gameObject.GetComponentInChildren<InventoryManager>().ToogleInventory();
+        gameObject.GetComponentInChildren<InventoryManager>().ToogleInventory(false);
         slotMgr.CreateSlot();
-        gameObject.GetComponentInChildren<InventoryManager>().ToogleInventory();
+        gameObject.GetComponentInChildren<InventoryManager>().ToogleInventory(false);
     }
 }

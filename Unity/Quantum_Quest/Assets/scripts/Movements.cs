@@ -45,6 +45,7 @@ public class Movements : NetworkBehaviour
         if (isLocalPlayer)
         {
             myTransform.FindChild("Camera").GetComponent<Camera>().enabled = true;
+            myTransform.FindChild("Camera").GetComponent<AudioListener>().enabled = true;
         }
     }
 
