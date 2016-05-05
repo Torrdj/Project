@@ -7,31 +7,35 @@ public class selectPrefab : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        Debug.Log(GameObject.Find("NetworkManager").GetComponent<PlayerInfo>().prefab_name);
-        switch (GameObject.Find("NetworkManager").GetComponent<PlayerInfo>().prefab_name)
+        BoxCollider[] bo = GetComponents<BoxCollider>();
+        switch (GameObject.Find("NetworkManager").GetComponent<PlayerInfo>().prefab_name[0])
         {
             case "Laptop_player":
-                activePrefab(GameObject.FindGameObjectsWithTag("Player"), "Laptop_player");
+                bo[0].enabled = true;
+                activePrefab(GetComponentsInChildren<Transform>(), "Laptop_player");
                 break;
             case "pc_player":
-                activePrefab(GameObject.FindGameObjectsWithTag("Player"), "pc_player");
+                bo[1].enabled = true;
+                activePrefab(GetComponentsInChildren<Transform>(), "pc_player");
                 break;
             case "Server1_player":
-                activePrefab(GameObject.FindGameObjectsWithTag("Player"), "Server1_player");
+                bo[2].enabled = true;
+                activePrefab(GetComponentsInChildren<Transform>(), "Server1_player");
                 break;
             default:
                 break;
         }
     }
 
-    void activePrefab(GameObject[] aux, string pref_name)
+    void activePrefab(Transform[] trs, string pref_name)
     {
-        foreach (GameObject a in aux)
+        foreach (Transform tr in trs)
         {
             if (isLocalPlayer
-                && a.name != "Player(Clone)"
-                && a.name != pref_name)
-                a.gameObject.SetActive(false);
+                && tr.name != "Player(Clone)"
+                && tr.name != "Camera"
+                && tr.name != pref_name)
+                tr.gameObject.SetActive(false);
         }
     }
 }
