@@ -14,11 +14,12 @@ public class menu : MonoBehaviour
     private string Computer = "Computer :\n" +
         "\nLes Computers, contrairement aux Servers, étaient connus de tous et quasiment indispensables pour chaque personne. Aujourd'hui, frustrés qu'on les compare sans cesse aux Laptops plus \"passe-partout\" qu'eux, ils se sont renfermés sur eux même afin d'accroître leur puissance et de peaufiner des scripts destructeurs.\n" +
         "\nLa classe Computer représentent les DPS \"lourds\". Ils infligent des dégâts élevés et maîtrisent des attaques puissantes pour achever l'ennemi.";
-    private string Laptop = "Laptop :\n"+
+    private string Laptop = "Laptop :\n" +
         "\nLes Laptops, petits derniers de l'industrie des ordinateurs encore présents aujourd'hui, représentent les \"blonds\" des Intelligences Artificielles.Toujours plus fins et plus rapides, ils tailladent leurs ennemis, ne se souciant que d'eux même.\n" +
         "\nLa classe Laptop correspond aux DPS \"légers\". Ils ont moins de vie que les autres classes, mais foudroient leurs ennemis en enchaînant les attaques à la même vitesse que l'électricité parcourt leurs circuits.";
     private int i = 0;
     public Image FondTexte;
+    public Image Options;
 
     //personnage
     public List<GameObject> ListePersonnage = new List<GameObject>();
@@ -26,13 +27,14 @@ public class menu : MonoBehaviour
 
     //button
     public GUIStyle GuiButton;
+    public List<GUIStyle> OptionButton;
 
     private bool menu1 = true;
     private bool menu2 = false;
     private bool menu3 = false;
     private bool menu4 = false;
     private int tourner = 1;
-    
+
     public Text DescriptionPersonnage;
     public Text Titre;
 
@@ -43,6 +45,10 @@ public class menu : MonoBehaviour
     //network
     public NetworkManager network;
     NetworkManagerHUD ntHUD;
+
+    //son
+    public bool Son;
+    public Scrollbar barSon;
 
     void Start()
     {
@@ -79,20 +85,27 @@ public class menu : MonoBehaviour
             {
                 Titre.enabled = true;
                 Titre.text = "Quantum Quest";
-                if (GUI.Button(new Rect(Screen.width / 2 - ((buttonWidth + 50) / 2), (2 * Screen.height / 5) - (buttonHeight / 2), buttonWidth + 50, buttonHeight), "Nouveau personnage", GuiButton))
+                if (GUI.Button(new Rect(Screen.width / 2 - ((buttonWidth + 50) / 2), (2 * Screen.height / 6) - (buttonHeight / 2), buttonWidth + 50, buttonHeight), "Nouveau personnage", GuiButton))
                 {
                     Titre.enabled = false;
                     menu1 = false;
                     menu2 = true;
                     tourner = 1;
                 }
-                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (3 * Screen.height / 5) - (buttonHeight / 2), buttonWidth, buttonHeight), "Charger", GuiButton))
+                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (3 * Screen.height / 6) - (buttonHeight / 2), buttonWidth, buttonHeight), "Charger", GuiButton))
                 {
 
                 }
-                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (4 * Screen.height / 5) - (buttonHeight / 2), buttonWidth, buttonHeight), "Quitter", GuiButton))
+                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (4 * Screen.height / 6) - (buttonHeight / 2), buttonWidth, buttonHeight), "Options", GuiButton))
                 {
-                    //fermeture tu jeu
+                    Titre.enabled = false;
+                    menu1 = false;
+                    menu4 = true;
+                    tourner = -1;
+                }
+                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (5 * Screen.height / 6) - (buttonHeight / 2), buttonWidth, buttonHeight), "Quitter", GuiButton))
+                {
+                    Application.Quit();
                 }
             }
 
@@ -140,13 +153,13 @@ public class menu : MonoBehaviour
                         DescriptionPersonnage.text = Server;
                         break;
                 }
-                
+
                 if (GUI.Button(new Rect((Screen.width - 200) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Valider", GuiButton))
                 {
                     network.playerPrefab = networkPlayer[i];
                     network.gameObject.GetComponent<PlayerInfo>().prefab_name = networkPlayer[i].name;
                     Titre.enabled = false;
-                    foreach(GameObject x in ListePersonnage)
+                    foreach (GameObject x in ListePersonnage)
                         x.SetActive(false);
                     FondTexte.enabled = false;
                     DescriptionPersonnage.enabled = false;
@@ -154,7 +167,7 @@ public class menu : MonoBehaviour
                     menu3 = true;
                     tourner = 1;
                 }
-                if (GUI.Button(new Rect((Screen.width - 75)  - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
+                if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
                 {
                     Titre.enabled = false;
                     foreach (GameObject x in ListePersonnage)
@@ -171,7 +184,7 @@ public class menu : MonoBehaviour
                     i = i % 3;
                 }
 
-                
+
 
             }
         }
@@ -216,12 +229,36 @@ public class menu : MonoBehaviour
             }
             else
             {
-                NetworkManagerHUD ntHUD = FindObjectOfType<NetworkManagerHUD>();
-                ntHUD.enabled = true;
+                Options.enabled = true;
+                Titre.enabled = true;
+                Titre.text = "Options";
+                barSon.gameObject.SetActive(true);
+                if (barSon.value == 0)
+                    Son = false;
+                else
+                    Son = true;
 
-                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (5 * Screen.height / 6) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour"))
+                if (Son)
                 {
-                    ntHUD.enabled = false;
+                    if (GUI.Button(new Rect((Screen.width / 2) - 230, Screen.height - 85, 50, 50), "", OptionButton[0]))
+                    {
+                        barSon.value = 0;
+                    }
+                }
+                else
+                {
+                    if (GUI.Button(new Rect((Screen.width / 2) - 230, Screen.height - 85, 50, 50), "", OptionButton[1]))
+                    {
+                        barSon.value = 0.5f;
+                    }
+                }
+
+
+                if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
+                {
+                    barSon.gameObject.SetActive(false);
+                    Options.enabled = false;
+                    Titre.enabled = false;
                     menu4 = false;
                     menu1 = true;
                     tourner = 1;
