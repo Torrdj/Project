@@ -17,9 +17,11 @@ public class Personnage : NetworkBehaviour
 
     protected string m_name;
     protected bool m_isParalyzed = false;
-
     protected bool load = true;
     public bool dead = false;
+
+    [SyncVar]
+    public string SyncPrefabName;
 
     Text pv, pv_e;
     Image pvBarre, pvBarre_e, pvBarre_e2;
@@ -36,6 +38,7 @@ public class Personnage : NetworkBehaviour
         m_attaque = 50; m_defense = 20;
         m_vitesseAtt = 1.0f;
 
+
         if (tag == "Player")
         {
             posCible = new Vector3(0, -10, 0);
@@ -43,6 +46,9 @@ public class Personnage : NetworkBehaviour
             if (isLocalPlayer)
             {
                 tag = "Player";
+
+                TransmitPrefabName();
+                selectMyPrefab();
 
                 pv = GameObject.Find("PV").GetComponent<Text>();
                 pvBarre = GameObject.Find("healthBar").GetComponent<Image>();
@@ -58,10 +64,8 @@ public class Personnage : NetworkBehaviour
             }
             else
             {
-                /*
-                foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
-                    go.tag = "Ennemi";*/
                 tag = "Ennemi";
+                selectEnnemiPrefab();
             }
         }
     }
@@ -145,7 +149,82 @@ public class Personnage : NetworkBehaviour
             m_vie = m_vieMax;
     }
 
+    public void selectMyPrefab()
+    {
+        BoxCollider[] bo = GetComponents<BoxCollider>();
+        switch (GameObject.Find("NetworkManager").GetComponent<PlayerInfo>().prefab_name)
+        {
+            case "Laptop_player":
+                bo[0].enabled = true;
+                activeMyPrefab(GetComponentsInChildren<Transform>(), "Laptop_player");
+                break;
+            case "pc_player":
+                bo[1].enabled = true;
+                activeMyPrefab(GetComponentsInChildren<Transform>(), "pc_player");
+                break;
+            case "Server1_player":
+                bo[2].enabled = true;
+                activeMyPrefab(GetComponentsInChildren<Transform>(), "Server1_player");
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void selectEnnemiPrefab()
+    {
+        BoxCollider[] bo = GetComponents<BoxCollider>();
+        switch (SyncPrefabName)
+        {
+            case "Laptop_player":
+                bo[0].enabled = true;
+                activePrefabEnnemi(GetComponentsInChildren<Transform>(), "Laptop_player");
+                break;
+            case "pc_player":
+                bo[1].enabled = true;
+                activePrefabEnnemi(GetComponentsInChildren<Transform>(), "pc_player");
+                break;
+            case "Server1_player":
+                bo[2].enabled = true;
+                activePrefabEnnemi(GetComponentsInChildren<Transform>(), "Server1_player");
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void activeMyPrefab(Transform[] trs, string pref_name)
+    {
+        foreach (Transform tr in trs)
+        {
+            if (tr.name != "Player(Clone)"
+                && tr.name != "Camera"
+                && tr.name != pref_name)
+                tr.gameObject.SetActive(false);
+        }
+    }
+    public void activePrefabEnnemi(Transform[] trs, string pref_name)
+    {
+        foreach (Transform tr in trs)
+        {
+            if (tr.name != "Player(Clone)"
+                && tr.name != pref_name)
+                tr.gameObject.SetActive(false);
+        }
+    }
+
     #region COMMANDES
+    [Client]
+    void TransmitPrefabName()
+    {
+        CmdSendMyPrefabNameToTheServer();
+    }
+    [Command]
+    void CmdSendMyPrefabNameToTheServer()
+    {
+        SyncPrefabName = GameObject.Find("NetworkManager").GetComponent<PlayerInfo>().prefab_name;
+    }
+
     [Command]
     void CmdTellMyShotToTheServer(Vector3 posTarget)
     {

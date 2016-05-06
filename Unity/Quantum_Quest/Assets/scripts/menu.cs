@@ -157,7 +157,7 @@ public class menu : MonoBehaviour
                 if (GUI.Button(new Rect((Screen.width - 200) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Valider", GuiButton))
                 {
                     //network.playerPrefab = networkPlayer[i];
-                    network.gameObject.GetComponent<PlayerInfo>().addToTab(networkPlayer[i].name);
+                    network.gameObject.GetComponent<PlayerInfo>().prefab_name = networkPlayer[i].name;
                     Titre.enabled = false;
                     foreach (GameObject x in ListePersonnage)
                         x.SetActive(false);

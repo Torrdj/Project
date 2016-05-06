@@ -3,12 +3,12 @@ using System.Collections;
 using UnityEngine.Networking;
 
 public class selectPrefab : NetworkBehaviour
-{
+{/*
     // Use this for initialization
     void Start()
     {
         BoxCollider[] bo = GetComponents<BoxCollider>();
-        switch (GameObject.Find("NetworkManager").GetComponent<PlayerInfo>().prefab_name[0])
+        switch (GameObject.Find("NetworkManager").GetComponent<PlayerInfo>().prefab_name)
         {
             case "Laptop_player":
                 bo[0].enabled = true;
@@ -38,4 +38,9 @@ public class selectPrefab : NetworkBehaviour
                 tr.gameObject.SetActive(false);
         }
     }
+
+    string GetPrefabName
+    {
+        get { return GameObject.Find("NetworkManager").GetComponent<PlayerInfo>().prefab_name; }
+    }*/
 }
