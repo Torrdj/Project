@@ -27,13 +27,13 @@ public class menu : MonoBehaviour
 
     //button
     public GUIStyle GuiButton;
-    public List<GUIStyle> OptionButton;
 
     private bool menu1 = true;
     private bool menu2 = false;
     private bool menu3 = false;
     private bool menu4 = false;
     private int tourner = 1;
+    private bool resolution = false;
 
     public Text DescriptionPersonnage;
     public Text Titre;
@@ -47,12 +47,12 @@ public class menu : MonoBehaviour
     NetworkManagerHUD ntHUD;
 
     //option
-    public float sfxVol = 6;
-    public float musicVol = 6;
-    public float fieldOfView = 80;
+    private float musicVol = 6;
+    private bool Fenetrer = true;
 
     void Start()
     {
+        //multijoueur
         Cursor.visible = true;
         ntHUD = FindObjectOfType<NetworkManagerHUD>();
         ntHUD.enabled = false;
@@ -70,7 +70,7 @@ public class menu : MonoBehaviour
         //Application.LoadLevel("test0");
         //SceneManager.LoadScene("first");
 
-        #region Menu 1
+        #region Menu 1 Principal
         if (menu1)
         {
             rot = Quaternion.AngleAxis(45, new Vector3(0, 135, 0));
@@ -115,7 +115,7 @@ public class menu : MonoBehaviour
         }
         #endregion
 
-        #region Menu 2
+        #region Menu 2 Personage
         if (menu2)
         {
             rot = Quaternion.AngleAxis(135, new Vector3(0, 135, 0));
@@ -191,7 +191,7 @@ public class menu : MonoBehaviour
         }
         #endregion
 
-        #region Menu 3
+        #region Menu 3 Multijoueur
         if (menu3)
         {
             rot = Quaternion.AngleAxis(225, new Vector3(0, 225, 0));
@@ -234,35 +234,58 @@ public class menu : MonoBehaviour
                 Titre.enabled = true;
                 Titre.text = "Options";
 
-                //Audio
-                sfxVol = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 50, Screen.height / 2, 100, 30), sfxVol, (float)0.0, (float)10.0);
-                GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 50, Screen.height / 2 - 5, 110, 30), "Effets sonores " + (int)sfxVol);
-
-                musicVol = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 50, Screen.height / 2 + 30, 100, 30), musicVol, (float)0.0, (float)10.0);
-                GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 50, Screen.height / 2 + 25, 100, 30), "Musique " + (int)musicVol);
+                //musique
+                musicVol = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 50, Screen.height / 2 + 130, 100, 30), musicVol, (float)0.0, (float)10.0);
+                GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 50, Screen.height / 2 + 125, 100, 30), "Musique " + (int)musicVol);
 
                 //Video
                 var qualities = QualitySettings.names;
-
-                GUILayout.BeginVertical();
+                
 
                 for (int i = 0; i < qualities.Length; i++)
                 {
-                    if (GUI.Button(new Rect(Screen.width / 2 - 50 - 125, Screen.height / 2 - 120 + i * 30 + 75, 100, 30), qualities[i], GuiButton))
+                    if (GUI.Button(new Rect(Screen.width / 2 - 50 - 175, Screen.height / 2 - 120 + i * 30 + 75, 100, 30), qualities[i], GuiButton))
                     {
                         QualitySettings.SetQualityLevel(i, true);
                     }
                 }
 
-                GUILayout.EndVertical();
 
-                fieldOfView = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 50, Screen.height / 2 - 30, 100, 20), fieldOfView, 30, 120);
-                GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 50, Screen.height / 2 - 35, 130, 30), "Champ de vision " + (int)fieldOfView);
+                Fenetrer = GUI.Toggle(new Rect(Screen.width / 2 - 50 + 50, Screen.height / 2 + 30, 125, 25), Fenetrer, "Fenêtrer");
+
+                Resolution[] resolutions = Screen.resolutions;
+                if (GUI.Button(new Rect(Screen.width / 2 - 50 - 75, Screen.height / 2 - 120 + 75, 100, 30), Screen.width + "x" + Screen.height, GuiButton))
+                {
+                    if (resolution)
+                        resolution = false;
+                    else
+                        resolution = true;
+                }
+                if (resolution)
+                {
+                    for (int i = 0; i < resolutions.Length; i++)
+                    {
+                        if (GUI.Button(new Rect(Screen.width / 2 - 50 - 75, Screen.height / 2 - 120 + i * 30 + 75 + 30, 100, 30), resolutions[i].width + "x" + resolutions[i].height, GuiButton))
+                        {
+                            if (Fenetrer)
+                                Screen.SetResolution(resolutions[i].width, resolutions[i].height, true);
+                            else
+                                Screen.SetResolution(resolutions[i].width, resolutions[i].height, false);
+                            resolution = false;
+                        }
+                    }
+                }
+
+
 
 
 
                 if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
                 {
+                    if (Fenetrer)
+                        Screen.SetResolution(Screen.width, Screen.height, true);
+                    else
+                        Screen.SetResolution(Screen.width, Screen.height, false);
                     Options.enabled = false;
                     Titre.enabled = false;
                     menu4 = false;
