@@ -46,9 +46,10 @@ public class menu : MonoBehaviour
     public NetworkManager network;
     NetworkManagerHUD ntHUD;
 
-    //son
-    public bool Son;
-    public Scrollbar barSon;
+    //option
+    public float sfxVol = 6;
+    public float musicVol = 6;
+    public float fieldOfView = 80;
 
     void Start()
     {
@@ -218,7 +219,7 @@ public class menu : MonoBehaviour
         }
         #endregion
 
-        #region Menu 4
+        #region Menu 4 Option
         if (menu4)
         {
             rot = Quaternion.AngleAxis(-45, new Vector3(0, 135, 0));
@@ -232,31 +233,36 @@ public class menu : MonoBehaviour
                 Options.enabled = true;
                 Titre.enabled = true;
                 Titre.text = "Options";
-                barSon.gameObject.SetActive(true);
-                if (barSon.value == 0)
-                    Son = false;
-                else
-                    Son = true;
 
-                if (Son)
+                //Audio
+                sfxVol = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 50, Screen.height / 2, 100, 30), sfxVol, (float)0.0, (float)10.0);
+                GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 50, Screen.height / 2 - 5, 110, 30), "Effets sonores " + (int)sfxVol);
+
+                musicVol = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 50, Screen.height / 2 + 30, 100, 30), musicVol, (float)0.0, (float)10.0);
+                GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 50, Screen.height / 2 + 25, 100, 30), "Musique " + (int)musicVol);
+
+                //Video
+                var qualities = QualitySettings.names;
+
+                GUILayout.BeginVertical();
+
+                for (int i = 0; i < qualities.Length; i++)
                 {
-                    if (GUI.Button(new Rect((Screen.width / 2) - 230, Screen.height - 85, 50, 50), "", OptionButton[0]))
+                    if (GUI.Button(new Rect(Screen.width / 2 - 50 - 125, Screen.height / 2 - 120 + i * 30 + 75, 100, 30), qualities[i], GuiButton))
                     {
-                        barSon.value = 0;
+                        QualitySettings.SetQualityLevel(i, true);
                     }
                 }
-                else
-                {
-                    if (GUI.Button(new Rect((Screen.width / 2) - 230, Screen.height - 85, 50, 50), "", OptionButton[1]))
-                    {
-                        barSon.value = 0.5f;
-                    }
-                }
+
+                GUILayout.EndVertical();
+
+                fieldOfView = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 50, Screen.height / 2 - 30, 100, 20), fieldOfView, 30, 120);
+                GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 50, Screen.height / 2 - 35, 130, 30), "Champ de vision " + (int)fieldOfView);
+
 
 
                 if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
                 {
-                    barSon.gameObject.SetActive(false);
                     Options.enabled = false;
                     Titre.enabled = false;
                     menu4 = false;
@@ -265,7 +271,11 @@ public class menu : MonoBehaviour
                 }
             }
         }
+
         #endregion
+
+
+
 
 
     }
