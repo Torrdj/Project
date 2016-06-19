@@ -226,6 +226,7 @@ public class Menu : MonoBehaviour
 
                 if(GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), (Screen.height/2) - (buttonHeight / 2), buttonWidth, buttonHeight), "Start", GuiButton))
                 {
+                    GameObject.Find("NetworkHolder").GetComponent<NetworkController>().enabled = true;
                     SceneManager.LoadScene("first");
                 }
 

@@ -1,17 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class NetworkController : MonoBehaviour {
+public class NetworkController : MonoBehaviour
+{
 
     private string _gameVersion = "0.1";
+    string currentSceneName;
+    public string lastSceneName;
 
     public Transform prefab;
 
-	// Use this for initialization
-	void Start () {
-        PhotonNetwork.ConnectUsingSettings(_gameVersion);
-	}
-	
+    // Use this for initialization
+    void Start()
+    {
+        DontDestroyOnLoad(this);
+    }
+    
+    void OnLevelWasLoaded()
+    {
+        if(PhotonNetwork.connectionState == ConnectionState.Disconnected)
+            PhotonNetwork.ConnectUsingSettings(_gameVersion);
+    }
+
     void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
@@ -19,21 +30,33 @@ public class NetworkController : MonoBehaviour {
 
     void OnJoinedLobby()
     {
-        PhotonNetwork.JoinOrCreateRoom("1", new RoomOptions(), new TypedLobby());
+        currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName == "first")
+            PhotonNetwork.JoinOrCreateRoom("1", new RoomOptions(), new TypedLobby());
+        else if (currentSceneName == "second")
+            PhotonNetwork.JoinOrCreateRoom("2", new RoomOptions(), new TypedLobby());
     }
 
     void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate("prefabs/players/" + prefab.name, prefab.position, transform.rotation, 0);
+        Transform spawnpoint = GameObject.Find("SpawnPoint").GetComponent<Transform>();
+        
+        if (currentSceneName == "first")
+            if (lastSceneName != null && lastSceneName == "second")
+                spawnpoint = GameObject.Find("SpawnPoint2").GetComponent<Transform>();
+                
+        PhotonNetwork.Instantiate("prefabs/players/" + prefab.name, spawnpoint.position, spawnpoint.rotation, 0);
+        GameObject.Find("Map").GetComponent<AudioSource>().Play();
     }
 
     void OnPhotonJoinRoomFailed(object[] codeAndMsg)
     {
-        
+
     }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
         //Debug.Log("Status : " + PhotonNetwork.connectionStateDetailed.ToString());
-	}
+    }
 }
