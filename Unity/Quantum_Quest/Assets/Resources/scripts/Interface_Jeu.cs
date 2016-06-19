@@ -15,10 +15,11 @@ public class Interface_Jeu : MonoBehaviour
     private bool Option = false;
 
     //Option
-    private float sfxVol = 6;
-    private float musicVol = 6;
-    private bool Fenetrer = true;
+    private float sfxVol = 20;
+    private float musicVol = 20;
+    private bool fullscreen;
     private bool resolution = false;
+    public Text Option_Titre;
 
     //Profil
     public RawImage Profil_laptop;
@@ -32,6 +33,7 @@ public class Interface_Jeu : MonoBehaviour
 
     void OnGUI()
     {
+
         #region Initialization
         //bar button
         Bar.rectTransform.sizeDelta = new Vector2(562, 104);
@@ -90,6 +92,11 @@ public class Interface_Jeu : MonoBehaviour
                 Game = false;
                 Menu_ = true;
             }
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Game = false;
+                Menu_ = true;
+            }
         }
 
         
@@ -123,13 +130,15 @@ public class Interface_Jeu : MonoBehaviour
 
         if (Option)
         {
-            //Audio
-            sfxVol = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 80, Screen.height / 2, 100, 30), sfxVol, (float)0.0, (float)10.0);
-            GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 80, Screen.height / 2 - 5, 110, 30), "Effets sonores " + (int)sfxVol);
+            Option_Titre.enabled = true;
 
-            musicVol = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 80, Screen.height / 2 + 30, 100, 30), musicVol, (float)0.0, (float)10.0);
-            GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 80, Screen.height / 2 + 25, 100, 30), "Musique " + (int)musicVol);
-            Music_Ambiance.volume = musicVol / 10;
+            //Audio
+            sfxVol = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 60, Screen.height / 2, 100, 30), sfxVol, (float)0.0, (float)100.0);
+            GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 60, Screen.height / 2 - 5, 130, 30), "Effets sonores " + (int)sfxVol + " %");
+
+            musicVol = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 60, Screen.height / 2 + 30, 100, 30), musicVol, (float)0.0, (float)100.0);
+            GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 60, Screen.height / 2 + 25, 100, 30), "Musique " + (int)musicVol + " %");
+            Music_Ambiance.volume = musicVol / 100;
 
             
 
@@ -140,7 +149,7 @@ public class Interface_Jeu : MonoBehaviour
 
             for (int i = 0; i < qualities.Length; i++)
             {
-                if (GUI.Button(new Rect(Screen.width / 2 - 50 - 175, Screen.height / 2 - 120 + i * 30 + 75 - 50, 100, 30), qualities[i], ListGuiButton[0]))
+                if (GUI.Button(new Rect(Screen.width / 2 - 50 - 175, Screen.height / 2 - 120 + i * 30 + 75 - 50 + 20, 100, 30), qualities[i], ListGuiButton[0]))
                 {
                     QualitySettings.SetQualityLevel(i, true);
                 }
@@ -149,11 +158,11 @@ public class Interface_Jeu : MonoBehaviour
             GUILayout.EndVertical();
 
 
-            Fenetrer = GUI.Toggle(new Rect(Screen.width / 2 - 50 + 80, Screen.height / 2 - 30, 125, 25), Fenetrer, "Fenêtrer");
+            fullscreen = GUI.Toggle(new Rect(Screen.width / 2 - 50 + 60, Screen.height / 2 - 30, 125, 25), fullscreen, "Plein Ecran");
 
 
             Resolution[] resolutions = Screen.resolutions;
-            if (GUI.Button(new Rect(Screen.width / 2 - 50 - 75, Screen.height / 2 - 120 + 25, 100, 30), Screen.width + "x" + Screen.height, ListGuiButton[0]))
+            if (GUI.Button(new Rect(Screen.width / 2 - 50 - 75, Screen.height / 2 - 120 + 25 + 20, 100, 30), Screen.width + "x" + Screen.height, ListGuiButton[0]))
             {
                 if (resolution)
                     resolution = false;
@@ -164,9 +173,9 @@ public class Interface_Jeu : MonoBehaviour
             {
                 for (int i = 0; i < resolutions.Length; i++)
                 {
-                    if (GUI.Button(new Rect(Screen.width / 2 - 50 - 75, Screen.height / 2 - 120 + i * 30 + 55, 100, 30), resolutions[i].width + "x" + resolutions[i].height, ListGuiButton[0]))
+                    if (GUI.Button(new Rect(Screen.width / 2 - 50 - 75, Screen.height / 2 - 120 + i * 30 + 55 + 20, 100, 30), resolutions[i].width + "x" + resolutions[i].height, ListGuiButton[0]))
                     {
-                        if (Fenetrer)
+                        if (fullscreen)
                             Screen.SetResolution(resolutions[i].width, resolutions[i].height, true);
                         else
                             Screen.SetResolution(resolutions[i].width, resolutions[i].height, false);
@@ -180,7 +189,9 @@ public class Interface_Jeu : MonoBehaviour
 
             if (GUI.Button(new Rect(Screen.width / 2 + 100, Screen.height / 2 + 75, 100, 50), "Retour", ListGuiButton[0]))
             {
-                if (Fenetrer)
+                PlayerPrefs.SetInt("Son", (int)musicVol);
+                Option_Titre.enabled = false;
+                if (fullscreen)
                     Screen.SetResolution(Screen.width, Screen.height, true);
                 else
                     Screen.SetResolution(Screen.width, Screen.height, false);
@@ -202,6 +213,8 @@ public class Interface_Jeu : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        fullscreen = Screen.fullScreen;
+        musicVol = PlayerPrefs.GetInt("Son");
     }
 
     // Update is called once per frame

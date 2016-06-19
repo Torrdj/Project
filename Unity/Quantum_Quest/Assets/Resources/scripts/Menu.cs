@@ -50,11 +50,12 @@ public class Menu : MonoBehaviour
     //NetworkManagerHUD ntHUD;
 
     //option
-    private float musicVol = 6;
-    private bool Fenetrer = true;
+    private float musicVol = 20;
+    private bool fullscreen;
 
     void Start()
     {
+        fullscreen = !Screen.fullScreen;
         //multijoueur
         Cursor.visible = true;
         //ntHUD = FindObjectOfType<NetworkManagerHUD>();
@@ -234,6 +235,7 @@ public class Menu : MonoBehaviour
 
                 if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), (Screen.height / 2) - (buttonHeight / 2) + 150, buttonWidth, buttonHeight), "Start", GuiButton))
                 {
+                    PlayerPrefs.SetInt("Son", (int)musicVol);
                     PlayerPrefs.SetString("Classe", player.type.ToString());
                     GameObject.Find("NetworkHolder").GetComponent<NetworkController>().enabled = true;
                     SceneManager.LoadScene("first");
@@ -268,8 +270,8 @@ public class Menu : MonoBehaviour
                 Titre.text = "Options";
 
                 //musique
-                musicVol = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 50, Screen.height / 2 + 130, 100, 30), musicVol, (float)0.0, (float)10.0);
-                GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 50, Screen.height / 2 + 125, 100, 30), "Musique " + (int)musicVol);
+                musicVol = GUI.HorizontalSlider(new Rect(Screen.width / 2 - 50 + 50, Screen.height / 2 + 130, 100, 30), musicVol, (float)0.0, (float)100.0);
+                GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 50, Screen.height / 2 + 125, 100, 30), "Musique " + (int)musicVol + " %");
 
                 //Video
                 var qualities = QualitySettings.names;
@@ -283,8 +285,7 @@ public class Menu : MonoBehaviour
                     }
                 }
 
-
-                Fenetrer = GUI.Toggle(new Rect(Screen.width / 2 - 50 + 50, Screen.height / 2 + 30, 125, 25), Fenetrer, "Fenêtrer");
+                fullscreen = GUI.Toggle(new Rect(Screen.width / 2 - 50 + 50, Screen.height / 2 + 30, 125, 25), fullscreen, "Plein Ecran");
 
                 Resolution[] resolutions = Screen.resolutions;
                 if (GUI.Button(new Rect(Screen.width / 2 - 50 - 75, Screen.height / 2 - 120 + 75, 100, 30), Screen.width + "x" + Screen.height, GuiButton))
@@ -300,7 +301,7 @@ public class Menu : MonoBehaviour
                     {
                         if (GUI.Button(new Rect(Screen.width / 2 - 50 - 75, Screen.height / 2 - 120 + i * 30 + 75 + 30, 100, 30), resolutions[i].width + "x" + resolutions[i].height, GuiButton))
                         {
-                            if (Fenetrer)
+                            if (fullscreen)
                                 Screen.SetResolution(resolutions[i].width, resolutions[i].height, true);
                             else
                                 Screen.SetResolution(resolutions[i].width, resolutions[i].height, false);
@@ -315,7 +316,7 @@ public class Menu : MonoBehaviour
 
                 if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
                 {
-                    if (Fenetrer)
+                    if (fullscreen)
                         Screen.SetResolution(Screen.width, Screen.height, true);
                     else
                         Screen.SetResolution(Screen.width, Screen.height, false);
