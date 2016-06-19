@@ -43,6 +43,9 @@ public class Menu : MonoBehaviour
     float speed = 1.0f;
 
     //network
+    public string Pseudo_;
+    public Text Titre_Pseudo;
+    public PlayerInfo player;
     //public NetworkManager network;
     //NetworkManagerHUD ntHUD;
 
@@ -158,7 +161,7 @@ public class Menu : MonoBehaviour
                 if (GUI.Button(new Rect((Screen.width - 200) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Valider", GuiButton))
                 {
                     PlayerInfo.TYPES type;
-                    switch(i)
+                    switch (i)
                     {
                         case 0:
                             type = PlayerInfo.TYPES.Laptop;
@@ -172,7 +175,7 @@ public class Menu : MonoBehaviour
                         default:
                             throw new System.IndexOutOfRangeException();
                     }
-                    GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>().type = type;
+                    GameObject.Find("PlayerInfo1").GetComponent<PlayerInfo>().type = type;
 
                     //network.playerPrefab = networkPlayer[i];
                     //network.gameObject.GetComponent<PlayerInfo>().prefab_name = networkPlayer[i].name;
@@ -218,20 +221,27 @@ public class Menu : MonoBehaviour
             }
             else
             {
+
+                Titre_Pseudo.enabled = true;
                 Titre.enabled = true;
                 Titre.text = "Ready ?";
                 //ntHUD.enabled = true;
                 //ntHUD.offsetX = Screen.width / 2 - 100;
                 //ntHUD.offsetY = Screen.height / 3;
 
-                if(GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), (Screen.height/2) - (buttonHeight / 2), buttonWidth, buttonHeight), "Start", GuiButton))
+                Pseudo_ = GUI.TextArea(new Rect(Screen.width / 2 - 75, Screen.height / 2 - 11, 150, 22), Pseudo_, 200);
+                PlayerPrefs.SetString("Pseudo", Pseudo_);
+
+                if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), (Screen.height / 2) - (buttonHeight / 2) + 150, buttonWidth, buttonHeight), "Start", GuiButton))
                 {
+                    PlayerPrefs.SetString("Classe", player.type.ToString());
                     GameObject.Find("NetworkHolder").GetComponent<NetworkController>().enabled = true;
                     SceneManager.LoadScene("first");
                 }
 
                 if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
                 {
+                    Titre_Pseudo.enabled = false;
                     Titre.enabled = false;
                     //ntHUD.enabled = false;
                     menu3 = false;
@@ -325,4 +335,6 @@ public class Menu : MonoBehaviour
 
 
     }
+    
+
 }

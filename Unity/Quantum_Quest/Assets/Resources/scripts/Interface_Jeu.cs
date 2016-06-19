@@ -11,7 +11,7 @@ public class Interface_Jeu : MonoBehaviour
     public AudioSource Music_Ambiance;
 
     private bool Game = true;
-    private bool Menu = false;
+    private bool Menu_ = false;
     private bool Option = false;
 
     //Option
@@ -19,6 +19,15 @@ public class Interface_Jeu : MonoBehaviour
     private float musicVol = 6;
     private bool Fenetrer = true;
     private bool resolution = false;
+
+    //Profil
+    public RawImage Profil_laptop;
+    public RawImage Profil_computer;
+    public RawImage Profil_server;
+    public Image Vie;
+    public Image Mana;
+    public Text Name;
+    public Text Niveau;
     
 
     void OnGUI()
@@ -27,9 +36,39 @@ public class Interface_Jeu : MonoBehaviour
         //bar button
         Bar.rectTransform.sizeDelta = new Vector2(562, 104);
         Bar.transform.position = new Vector2(Screen.width / 2, 54);
+        Bar.enabled = true;
+
         //menu_image
         Menu_Image.rectTransform.sizeDelta = new Vector2(500, 300);
         Menu_Image.transform.position = new Vector2(Screen.width / 2, Screen.height / 2);
+        //vie
+        if (PlayerPrefs.GetString("Classe") == "Computer")
+        {
+            Profil_computer.enabled = true;
+            Profil_computer.rectTransform.sizeDelta = new Vector2(350, 100);
+            Profil_computer.transform.position = new Vector2(10 + 175, Screen.height - 10 - 50);
+        }
+        else if (PlayerPrefs.GetString("Classe") == "Laptop")
+        {
+            Profil_laptop.enabled = true;
+            Profil_laptop.rectTransform.sizeDelta = new Vector2(350, 100);
+            Profil_laptop.transform.position = new Vector2(10 + 175, Screen.height - 10 - 50);
+        }
+        else 
+        {
+            Profil_server.enabled = true;
+            Profil_server.rectTransform.sizeDelta = new Vector2(350, 100);
+            Profil_server.transform.position = new Vector2(10 + 175, Screen.height - 10 - 50);
+        }
+        Vie.enabled = true;
+        Mana.enabled = true;
+        Niveau.enabled = true;
+        Name.enabled = true;
+        Vie.transform.position = new Vector2(10 + 100 + 102, Screen.height - 10 - 44);
+        Mana.transform.position = new Vector2(10 + 100 + 102, Screen.height - 10 - 52);
+        Niveau.transform.position = new Vector2(10 + 82 + 102, Screen.height - 10 - 41);
+        Name.transform.position = new Vector2(10 + 82 + 102, Screen.height - 10 - 30);
+        Name.text = PlayerPrefs.GetString("Pseudo") == "" ? "Bob" : PlayerPrefs.GetString("Pseudo");
 
         //button
         for (int i = 0; i < ListGuiButtonAttack.Count; i++)
@@ -41,6 +80,7 @@ public class Interface_Jeu : MonoBehaviour
         }
         #endregion
         
+        
 
         if (Game)
         {
@@ -48,12 +88,12 @@ public class Interface_Jeu : MonoBehaviour
             if (GUI.Button(new Rect(Screen.width / 2 + 261 + 2, Screen.height - 27, 25, 25), "", ListGuiButton[1]))
             {
                 Game = false;
-                Menu = true;
+                Menu_ = true;
             }
         }
 
         
-        if (Menu)
+        if (Menu_)
         {
             Menu_Image.enabled = true;
             if (GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 100, 120, 50), "Menu Principal", ListGuiButton[0]))
@@ -62,12 +102,12 @@ public class Interface_Jeu : MonoBehaviour
             }
             if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 40, 100, 50), "Retour", ListGuiButton[0]))
             {
-                Menu = false;
+                Menu_ = false;
                 Game = true;
             }
             if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 20, 100, 50), "Option", ListGuiButton[0]))
             {
-                Menu = false;
+                Menu_ = false;
                 Option = true;
             }
             if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 80, 100, 50), "Quitter", ListGuiButton[0]))
@@ -77,7 +117,7 @@ public class Interface_Jeu : MonoBehaviour
             if (GUI.Button(new Rect(Screen.width / 2 + 261 + 2, Screen.height - 27, 25, 25), "", ListGuiButton[1]))
             {
                 Game = true;
-                Menu = false;
+                Menu_ = false;
             }
         }
 
@@ -144,7 +184,7 @@ public class Interface_Jeu : MonoBehaviour
                     Screen.SetResolution(Screen.width, Screen.height, true);
                 else
                     Screen.SetResolution(Screen.width, Screen.height, false);
-                Menu = true;
+                Menu_ = true;
                 Option = false;
             }
             if (GUI.Button(new Rect(Screen.width / 2 + 261 + 2, Screen.height - 27, 25, 25), "", ListGuiButton[1]))
@@ -167,6 +207,5 @@ public class Interface_Jeu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 }
