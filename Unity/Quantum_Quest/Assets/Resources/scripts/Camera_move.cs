@@ -36,9 +36,12 @@ public class Camera_move : MonoBehaviour
     private float desiredDistance;
     private float correctedDistance;
 
+    Interface_Jeu intJeu;
+
     void Start()
     {
         myView = gameObject.GetComponentInParent<PhotonView>();
+        intJeu = GameObject.Find("GUIHolder").GetComponentInChildren<Interface_Jeu>();
 
         if (myView.isMine)
         {
@@ -60,7 +63,7 @@ public class Camera_move : MonoBehaviour
 
     void Update()
     {
-        if (myView.isMine)
+        if (myView.isMine && !intJeu.MenuOpen)
         {
             //Move the Player with left & right button press together
             if (Input.GetMouseButton(1) && Input.GetMouseButton(0))
@@ -83,7 +86,7 @@ public class Camera_move : MonoBehaviour
      */
     void LateUpdate()
     {
-        if (myView.isMine)
+        if (myView.isMine && !intJeu.MenuOpen)
         {
             Vector3 vTargetOffset;
 

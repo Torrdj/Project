@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class Interface_Jeu : MonoBehaviour
@@ -29,7 +30,9 @@ public class Interface_Jeu : MonoBehaviour
     public Image Mana;
     public Text Name;
     public Text Niveau;
-    
+
+    bool canEscape = true;
+
 
     void OnGUI()
     {
@@ -56,7 +59,7 @@ public class Interface_Jeu : MonoBehaviour
             Profil_laptop.rectTransform.sizeDelta = new Vector2(350, 100);
             Profil_laptop.transform.position = new Vector2(10 + 175, Screen.height - 10 - 50);
         }
-        else 
+        else
         {
             Profil_server.enabled = true;
             Profil_server.rectTransform.sizeDelta = new Vector2(350, 100);
@@ -81,8 +84,8 @@ public class Interface_Jeu : MonoBehaviour
             }
         }
         #endregion
-        
-        
+
+
 
         if (Game)
         {
@@ -92,16 +95,18 @@ public class Interface_Jeu : MonoBehaviour
                 Game = false;
                 Menu_ = true;
             }
-            if (Input.GetKey(KeyCode.Escape))
+            if (canEscape && Input.GetKey(KeyCode.Escape))
             {
                 Game = false;
                 Menu_ = true;
+                StartCoroutine(WaitForEscape());
             }
         }
 
-        
+
         if (Menu_)
         {
+            Cursor.visible = true;
             Menu_Image.enabled = true;
             if (GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 100, 120, 50), "Menu Principal", ListGuiButton[0]))
             {
@@ -126,6 +131,13 @@ public class Interface_Jeu : MonoBehaviour
                 Game = true;
                 Menu_ = false;
             }
+
+            if(canEscape && Input.GetKey(KeyCode.Escape))
+            {
+                Menu_ = false;
+                Game = true;
+                StartCoroutine(WaitForEscape());
+            }
         }
 
         if (Option)
@@ -140,7 +152,7 @@ public class Interface_Jeu : MonoBehaviour
             GUI.Label(new Rect(Screen.width / 2 - 50 + 110 + 60, Screen.height / 2 + 25, 100, 30), "Musique " + (int)musicVol + " %");
             Music_Ambiance.volume = musicVol / 100;
 
-            
+
 
             //Video
             var qualities = QualitySettings.names;
@@ -207,6 +219,18 @@ public class Interface_Jeu : MonoBehaviour
 
 
 
+    }
+
+    IEnumerator WaitForEscape()
+    {
+        canEscape = false;
+        yield return new WaitForSeconds(0.2f);
+        canEscape = true;
+    }
+
+    public bool MenuOpen
+    {
+        get { return Menu_; }
     }
 
 

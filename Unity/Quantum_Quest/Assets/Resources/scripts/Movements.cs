@@ -24,12 +24,15 @@ public class Movements : MonoBehaviour
     float m_TurnAmount;
     float m_ForwardAmount;
 
+    Interface_Jeu intJeu;
+
     void Start()
     {
         myTransform = this.gameObject.GetComponent<Transform>();
         myView = this.gameObject.GetComponent<PhotonView>();
 
         m_Cam = myTransform.GetComponentInChildren<Camera>().transform;
+        intJeu = GameObject.Find("GUIHolder").GetComponentInChildren<Interface_Jeu>();
         
         if (myView.isMine)
         {
@@ -40,7 +43,7 @@ public class Movements : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (myView.isMine /*&& !gameObject.GetComponent<Personnage>().dead*/)
+        if (myView.isMine && !intJeu.MenuOpen /*&& !gameObject.GetComponent<Personnage>().dead*/)
         {
             if (Camera_move.buttonDown)
             {
