@@ -176,7 +176,7 @@ public class Menu : MonoBehaviour
                         default:
                             throw new System.IndexOutOfRangeException();
                     }
-                    GameObject.Find("PlayerInfo1").GetComponent<PlayerInfo>().type = type;
+                    GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>().type = type;
 
                     //network.playerPrefab = networkPlayer[i];
                     //network.gameObject.GetComponent<PlayerInfo>().prefab_name = networkPlayer[i].name;
