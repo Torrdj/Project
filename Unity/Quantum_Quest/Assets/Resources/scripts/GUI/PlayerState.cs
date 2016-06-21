@@ -32,13 +32,13 @@ public class PlayerState : MonoBehaviour {
             Vie.transform.position = new Vector2(10 + 104 + Vie.rectTransform.sizeDelta.x / 2, Screen.height - 10 - 43);
         
         //vie
-        if (PlayerPrefs.GetString("Classe") == "Computer")
+        if (playerinfo.Type == PlayerInfo.TYPES.Computer)
         {
             Profil_computer.enabled = true;
             Profil_computer.rectTransform.sizeDelta = new Vector2(350, 100);
             Profil_computer.transform.position = new Vector2(10 + 175, Screen.height - 10 - 50);
         }
-        else if (PlayerPrefs.GetString("Classe") == "Laptop")
+        else if (playerinfo.Type == PlayerInfo.TYPES.Laptop)
         {
             Profil_laptop.enabled = true;
             Profil_laptop.rectTransform.sizeDelta = new Vector2(350, 100);
@@ -60,6 +60,6 @@ public class PlayerState : MonoBehaviour {
         Mana.transform.position = new Vector2(10 + 100 + 102, Screen.height - 10 - 52);
         Niveau.transform.position = new Vector2(10 + 82 + 102, Screen.height - 10 - 41);
         Name.transform.position = new Vector2(10 + 82 + 102, Screen.height - 10 - 30);
-        Name.text = PlayerPrefs.GetString("Pseudo") == "" ? "Bob" : PlayerPrefs.GetString("Pseudo");
+        Name.text = playerinfo.Name == "" ? "Bob" : playerinfo.Name;
     }
 }

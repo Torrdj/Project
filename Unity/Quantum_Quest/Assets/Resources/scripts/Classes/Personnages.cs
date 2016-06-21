@@ -10,17 +10,16 @@ public class Personnages : MonoBehaviour
     protected GameObject EnnemiProfile;
 
     protected int cible = -1;
-
-    [SerializeField]
-    protected float m_vie, m_vieMax,
+    
+    public float m_vie, m_vieMax,
         m_mana, m_manaMax,
         m_attaque, m_defense,
         m_vitesseAtt;
 
-    protected string m_name;
-    protected bool m_isParalyzed = false;
-    protected bool _isLoad = true;
-    protected bool _dead = false;
+    public string m_name;
+    public bool m_isParalyzed = false;
+    public bool _isLoad = true;
+    public bool _dead = false;
 
     public void Start()
     {
@@ -42,6 +41,7 @@ public class Personnages : MonoBehaviour
                 EnnemiProfile.SetActive(false);
 
                 info.Vie = m_vie; info.VieMax = m_vieMax;
+                m_name = info.Name;
             }
             else
             {

@@ -10,6 +10,7 @@ public class Interface_Jeu : MonoBehaviour
     public List<GUIStyle> ListGuiButtonAttack = new List<GUIStyle>(10);
     public List<GUIStyle> ListGuiButton;
     public AudioSource Music_Ambiance;
+    public List<Texture2D> ListTexture2D;
 
     private bool Game = true;
     private bool Menu_ = false;
@@ -21,6 +22,8 @@ public class Interface_Jeu : MonoBehaviour
     private bool fullscreen;
     private bool resolution = false;
     public Text Option_Titre;
+
+    PlayerInfo player;
 
     bool canEscape = true;
 
@@ -35,7 +38,7 @@ public class Interface_Jeu : MonoBehaviour
         //button
         for (int i = 0; i < ListGuiButtonAttack.Count; i++)
         {
-            if (GUI.Button(new Rect(Screen.width / 2 - 261 + (i + 1) * 2 + i * (50), Screen.height - 59, 50, 50), "") && Game) // ajouter GUIStyle des button
+            if (GUI.Button(new Rect(Screen.width / 2 - 261 + (i + 1) * 2 + i * (50), Screen.height - 59, 50, 50), "", ListGuiButtonAttack[i]) && Game) // ajouter GUIStyle des button
             {
                 //faire les attaque en fonction de i
             }
@@ -203,8 +206,42 @@ public class Interface_Jeu : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        player = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
         fullscreen = Screen.fullScreen;
         musicVol = PlayerPrefs.GetInt("Son");
+
+        if (player.Type == PlayerInfo.TYPES.Laptop)
+        {
+            ListGuiButtonAttack[1].normal.background = ListTexture2D[21];
+            ListGuiButtonAttack[1].active.background = ListTexture2D[22];
+            ListGuiButtonAttack[1].hover.background = ListTexture2D[23];
+
+            ListGuiButtonAttack[2].normal.background = ListTexture2D[15];
+            ListGuiButtonAttack[2].active.background = ListTexture2D[16];
+            ListGuiButtonAttack[2].hover.background = ListTexture2D[17];
+        }
+
+        if (player.Type == PlayerInfo.TYPES.Computer)
+        {
+            ListGuiButtonAttack[1].normal.background = ListTexture2D[6];
+            ListGuiButtonAttack[1].active.background = ListTexture2D[7];
+            ListGuiButtonAttack[1].hover.background = ListTexture2D[8];
+
+            ListGuiButtonAttack[2].normal.background = ListTexture2D[18];
+            ListGuiButtonAttack[2].active.background = ListTexture2D[19];
+            ListGuiButtonAttack[2].hover.background = ListTexture2D[20];
+        }
+        if (player.Type == PlayerInfo.TYPES.Server)
+        {
+            ListGuiButtonAttack[1].normal.background = ListTexture2D[0];
+            ListGuiButtonAttack[1].active.background = ListTexture2D[1];
+            ListGuiButtonAttack[1].hover.background = ListTexture2D[2];
+
+            ListGuiButtonAttack[2].normal.background = ListTexture2D[9];
+            ListGuiButtonAttack[2].active.background = ListTexture2D[10];
+            ListGuiButtonAttack[2].hover.background = ListTexture2D[11];
+        }
+
     }
 
     // Update is called once per frame

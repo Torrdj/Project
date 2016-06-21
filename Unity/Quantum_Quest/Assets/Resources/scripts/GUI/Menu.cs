@@ -60,6 +60,7 @@ public class Menu : MonoBehaviour
         Cursor.visible = true;
         //ntHUD = FindObjectOfType<NetworkManagerHUD>();
         //ntHUD.enabled = false;
+        player = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
     }
 
     // Use this for initialization
@@ -231,12 +232,11 @@ public class Menu : MonoBehaviour
                 //ntHUD.offsetY = Screen.height / 3;
 
                 Pseudo_ = GUI.TextArea(new Rect(Screen.width / 2 - 75, Screen.height / 2 - 11, 150, 22), Pseudo_, 200);
-                PlayerPrefs.SetString("Pseudo", Pseudo_);
 
                 if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), (Screen.height / 2) - (buttonHeight / 2) + 150, buttonWidth, buttonHeight), "Start", GuiButton))
                 {
+                    player.Name = Pseudo_;
                     PlayerPrefs.SetInt("Son", (int)musicVol);
-                    PlayerPrefs.SetString("Classe", player.Type.ToString());
                     GameObject.Find("NetworkHolder").GetComponent<NetworkController>().enabled = true;
                     SceneManager.LoadScene("first");
                 }

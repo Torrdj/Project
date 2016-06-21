@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerInfo : MonoBehaviour {
+public class PlayerInfo : MonoBehaviour
+{
 
     public enum TYPES
     {
@@ -17,20 +18,22 @@ public class PlayerInfo : MonoBehaviour {
     string _name;
     float _vie, _vieMax;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         DontDestroyOnLoad(this);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     void OnLevelWasLoaded()
     {
         int i;
-        switch(_type)
+        switch (_type)
         {
             case TYPES.Laptop:
                 i = 0;
@@ -57,6 +60,7 @@ public class PlayerInfo : MonoBehaviour {
     public string Name
     {
         get { return _name; }
+        set { _name = value; }
     }
 
     public float Vie
