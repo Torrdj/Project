@@ -38,6 +38,8 @@ public class Camera_move : MonoBehaviour
 
     Interface_Jeu intJeu;
 
+    Personnages player;
+
     void Start()
     {
         myView = gameObject.GetComponentInParent<PhotonView>();
@@ -53,6 +55,7 @@ public class Camera_move : MonoBehaviour
             desiredDistance = distance;
             correctedDistance = distance;
 
+            player = GetComponentInParent<Personnages>();
 
             // Make the rigid body not change rotation
             if (GetComponent<Rigidbody>())
@@ -66,7 +69,8 @@ public class Camera_move : MonoBehaviour
         if (myView.isMine && !intJeu.MenuOpen)
         {
             //Move the Player with left & right button press together
-            if (Input.GetMouseButton(1) && Input.GetMouseButton(0))
+            if (!player.isDead
+                && Input.GetMouseButton(1) && Input.GetMouseButton(0))
             {
                 float targetRotationAngle = target.eulerAngles.y;
                 float currentRotationAngle = transform.eulerAngles.y;
@@ -104,7 +108,7 @@ public class Camera_move : MonoBehaviour
                 Cursor.visible = false;
             }
             //Reset the camera angle and Rotate the Target Around the World!
-            else if (Input.GetMouseButton(1))
+            else if (!player.isDead && Input.GetMouseButton(1))
             {
                 float targetRotationAngle = target.eulerAngles.y;
                 float currentRotationAngle = transform.eulerAngles.y;

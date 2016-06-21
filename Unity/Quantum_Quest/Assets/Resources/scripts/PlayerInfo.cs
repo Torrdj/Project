@@ -13,9 +13,9 @@ public class PlayerInfo : MonoBehaviour {
     [SerializeField]
     Transform[] listOfPrefabs;
 
-    public TYPES type;
-    public string _name;
-    public float vie, vieMax;
+    TYPES _type;
+    string _name;
+    float _vie, _vieMax;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +30,7 @@ public class PlayerInfo : MonoBehaviour {
     void OnLevelWasLoaded()
     {
         int i;
-        switch(type)
+        switch(_type)
         {
             case TYPES.Laptop:
                 i = 0;
@@ -46,4 +46,29 @@ public class PlayerInfo : MonoBehaviour {
         }
         GameObject.Find("NetworkHolder").GetComponent<NetworkController>().prefab = listOfPrefabs[i];
     }
+
+    #region GETTERS/SETTERS
+    public TYPES Type
+    {
+        get { return _type; }
+        set { _type = value; }
+    }
+
+    public string Name
+    {
+        get { return _name; }
+    }
+
+    public float Vie
+    {
+        get { return _vie; }
+        set { _vie = value; }
+    }
+
+    public float VieMax
+    {
+        get { return _vieMax; }
+        set { _vieMax = value; }
+    }
+    #endregion
 }

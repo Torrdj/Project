@@ -176,7 +176,7 @@ public class Menu : MonoBehaviour
                         default:
                             throw new System.IndexOutOfRangeException();
                     }
-                    GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>().type = type;
+                    GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>().Type = type;
 
                     //network.playerPrefab = networkPlayer[i];
                     //network.gameObject.GetComponent<PlayerInfo>().prefab_name = networkPlayer[i].name;
@@ -236,7 +236,7 @@ public class Menu : MonoBehaviour
                 if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), (Screen.height / 2) - (buttonHeight / 2) + 150, buttonWidth, buttonHeight), "Start", GuiButton))
                 {
                     PlayerPrefs.SetInt("Son", (int)musicVol);
-                    PlayerPrefs.SetString("Classe", player.type.ToString());
+                    PlayerPrefs.SetString("Classe", player.Type.ToString());
                     GameObject.Find("NetworkHolder").GetComponent<NetworkController>().enabled = true;
                     SceneManager.LoadScene("first");
                 }

@@ -22,86 +22,15 @@ public class Interface_Jeu : MonoBehaviour
     private bool resolution = false;
     public Text Option_Titre;
 
-    //Profil
-    public RawImage Profil_laptop;
-    public RawImage Profil_computer;
-    public RawImage Profil_server;
-    public RawImage Profil_Enemie;
-    public Image Vie;
-    public Image Mana;
-    public Text Name;
-    public Text Niveau;
-
-    public Image Vie_enemi;
-    public Image Mana_enemi;
-    public Text Name_enemi;
-    public Text Niveau_enemi;
-
-
-    private PlayerInfo playerinfo;
-
     bool canEscape = true;
 
 
     void OnGUI()
     {
-
-        #region Initialization
-        Vie.rectTransform.sizeDelta = new Vector2(197 * (playerinfo.vie / playerinfo.vieMax), 6);                                                     
-        Vie.transform.position = new Vector2(10 + 104 + Vie.rectTransform.sizeDelta.x / 2, Screen.height - 10 - 43);
-        Vie_enemi.transform.position = new Vector2(Screen.width - 10 - 104 - Vie_enemi.rectTransform.sizeDelta.x / 2, Screen.height - 10 - 43);
-
         //bar button
         Bar.rectTransform.sizeDelta = new Vector2(562, 104);
         Bar.transform.position = new Vector2(Screen.width / 2, 54);
         Bar.enabled = true;
-
-        //menu_image
-        Menu_Image.rectTransform.sizeDelta = new Vector2(500, 300);
-        Menu_Image.transform.position = new Vector2(Screen.width / 2, Screen.height / 2);
-        //vie
-        if (PlayerPrefs.GetString("Classe") == "Computer")
-        {
-            Profil_computer.enabled = true;
-            Profil_computer.rectTransform.sizeDelta = new Vector2(350, 100);
-            Profil_computer.transform.position = new Vector2(10 + 175, Screen.height - 10 - 50);
-        }
-        else if (PlayerPrefs.GetString("Classe") == "Laptop")
-        {
-            Profil_laptop.enabled = true;
-            Profil_laptop.rectTransform.sizeDelta = new Vector2(350, 100);
-            Profil_laptop.transform.position = new Vector2(10 + 175, Screen.height - 10 - 50);
-        }
-        else
-        {
-            Profil_server.enabled = true;
-            Profil_server.rectTransform.sizeDelta = new Vector2(350, 100);
-            Profil_server.transform.position = new Vector2(10 + 175, Screen.height - 10 - 50);
-        }
-        Profil_Enemie.enabled = true;
-        Profil_Enemie.rectTransform.sizeDelta = new Vector2(350, 100);
-        Profil_Enemie.transform.position = new Vector2(Screen.width - 10 - 175, Screen.height - 10 - 50);
-
-        Mana_enemi.transform.position = new Vector2(Screen.width - 10 - 100 - 103, Screen.height - 10 - 52);
-        Niveau_enemi.transform.position = new Vector2(Screen.width - 32 - 82 - 102, Screen.height - 10 - 41);
-        Name_enemi.transform.position = new Vector2(Screen.width - 32 - 82 - 102, Screen.height - 10 - 30);
-
-
-        Vie.enabled = true;
-        Mana.enabled = true;
-        Niveau.enabled = true;
-        Name.enabled = true;
-
-        Vie_enemi.enabled = true;
-        Mana_enemi.enabled = true;
-        Niveau_enemi.enabled = true;
-        Name_enemi.enabled = true;
-
-        Mana.transform.position = new Vector2(10 + 100 + 102, Screen.height - 10 - 52);
-        Niveau.transform.position = new Vector2(10 + 82 + 102, Screen.height - 10 - 41);
-        Name.transform.position = new Vector2(10 + 82 + 102, Screen.height - 10 - 30);
-        Name.text = PlayerPrefs.GetString("Pseudo") == "" ? "Bob" : PlayerPrefs.GetString("Pseudo");
-        
 
         //button
         for (int i = 0; i < ListGuiButtonAttack.Count; i++)
@@ -111,13 +40,11 @@ public class Interface_Jeu : MonoBehaviour
                 //faire les attaque en fonction de i
             }
         }
-        #endregion
-
-
 
         if (Game)
         {
             Menu_Image.enabled = false;
+            Option_Titre.enabled = false;
             if (GUI.Button(new Rect(Screen.width / 2 + 261 + 2 + 10, Screen.height - 27, 25, 25), "", ListGuiButton[1]))
             {
                 Game = false;
@@ -247,6 +174,13 @@ public class Interface_Jeu : MonoBehaviour
                 Game = true;
                 Option = false;
             }
+
+            if (canEscape && Input.GetKey(KeyCode.Escape))
+            {
+                Option = false;
+                Game = true;
+                StartCoroutine(WaitForEscape());
+            }
         }
 
 
@@ -262,14 +196,13 @@ public class Interface_Jeu : MonoBehaviour
 
     public bool MenuOpen
     {
-        get { return Menu_; }
+        get { return Menu_ || Option; }
     }
 
 
     // Use this for initialization
     void Start()
     {
-        playerinfo = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
         fullscreen = Screen.fullScreen;
         musicVol = PlayerPrefs.GetInt("Son");
     }
