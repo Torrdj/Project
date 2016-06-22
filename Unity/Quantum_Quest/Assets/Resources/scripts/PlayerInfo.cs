@@ -24,12 +24,6 @@ public class PlayerInfo : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void OnLevelWasLoaded()
     {
         int i;

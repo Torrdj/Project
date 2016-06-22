@@ -8,9 +8,9 @@ public class Computer : Personnages
 
     new void Start()
     {
-        types = PlayerInfo.TYPES.Computer;
         base.Start();
 
+        type = PlayerInfo.TYPES.Computer;
         if (tag == "Player")
         {
             if (myView.isMine)
@@ -94,7 +94,7 @@ public class Computer : Personnages
     {
         cible.SendMessage("UpdateVit", newVit);
         yield return new WaitForSeconds(3);
-        cible.SendMessage("UpdateVIt", oldVit);
+        cible.SendMessage("UpdateVit", oldVit);
     }
 
     IEnumerator LoadingTrojan()

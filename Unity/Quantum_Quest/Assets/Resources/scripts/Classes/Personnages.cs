@@ -6,14 +6,12 @@ public class Personnages : MonoBehaviour
 {
     protected PhotonView myView;
     protected PlayerInfo info;
-    protected PlayerInfo.TYPES types;
+    protected PlayerInfo.TYPES type;
 
-    protected TargetState targetstate;
-    
     protected GameObject EnnemiProfile;
 
     protected int cible = -1;
-    
+
     protected float m_vie, m_vieMax,
         m_mana, m_manaMax,
         m_attaque, m_defense,
@@ -77,12 +75,14 @@ public class Personnages : MonoBehaviour
                     {
                         cible = hit.collider.gameObject.GetComponentInParent<PhotonView>().viewID;
                         EnnemiProfile.SetActive(true);
-                        targetstate = GameObject.Find("EnnemiProfile").GetComponent<TargetState>();
-                        targetstate.ViewID = cible;
+
+                        GameObject.Find("EnnemiProfile").GetComponent<TargetState>().ViewID = cible;
                     }
                     else
                     {
                         cible = -1;
+
+                        EnnemiProfile.GetComponent<TargetState>().ViewID = cible;
                         EnnemiProfile.SetActive(false);
                     }
                 }
@@ -146,9 +146,9 @@ public class Personnages : MonoBehaviour
         set { _dead = value; }
     }
 
-    public PlayerInfo.TYPES Types
+    public PlayerInfo.TYPES Type
     {
-        get { return types; }
+        get { return type; }
     }
 
     public bool isLoad

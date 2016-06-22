@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class NetworkController : MonoBehaviour
 {
-
     private string _gameVersion = "0.1";
     string currentSceneName;
     public string lastSceneName;
@@ -16,10 +16,10 @@ public class NetworkController : MonoBehaviour
     {
         DontDestroyOnLoad(this);
     }
-    
+
     void OnLevelWasLoaded()
     {
-        if(PhotonNetwork.connectionState == ConnectionState.Disconnected)
+        if (PhotonNetwork.connectionState == ConnectionState.Disconnected)
             PhotonNetwork.ConnectUsingSettings(_gameVersion);
     }
 
@@ -40,23 +40,17 @@ public class NetworkController : MonoBehaviour
     void OnJoinedRoom()
     {
         Transform spawnpoint = GameObject.Find("SpawnPoint").GetComponent<Transform>();
-        
+
         if (currentSceneName == "first")
             if (lastSceneName != null && lastSceneName == "second")
                 spawnpoint = GameObject.Find("SpawnPoint2").GetComponent<Transform>();
-                
+        
         PhotonNetwork.Instantiate("prefabs/players/" + prefab.name, spawnpoint.position, spawnpoint.rotation, 0);
         GameObject.Find("Map").GetComponent<AudioSource>().Play();
     }
 
     void OnPhotonJoinRoomFailed(object[] codeAndMsg)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.Log("Status : " + PhotonNetwork.connectionStateDetailed.ToString());
+        Debug.Log("Can't join the room.");
     }
 }

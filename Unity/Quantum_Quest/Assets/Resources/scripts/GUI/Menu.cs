@@ -238,7 +238,9 @@ public class Menu : MonoBehaviour
                     player.Name = Pseudo_;
                     PlayerPrefs.SetInt("Son", (int)musicVol);
                     GameObject.Find("NetworkHolder").GetComponent<NetworkController>().enabled = true;
-                    SceneManager.LoadScene("first");
+
+                    //SceneManager.LoadSceneAsync("first");
+                    SceneManager.LoadScene("loadingScene");
                 }
 
                 if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))

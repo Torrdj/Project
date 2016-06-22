@@ -16,9 +16,9 @@ public class Server : Personnages
     // Use this for initialization
     new void Start()
     {
-        types = PlayerInfo.TYPES.Server;
         base.Start();
 
+        type = PlayerInfo.TYPES.Server;
         if (tag == "Player")
         {
             if (myView.isMine)

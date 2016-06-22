@@ -4,7 +4,7 @@ using System.Collections;
 
 public class TargetState : MonoBehaviour
 {
-    private int viewID;
+    private int viewID = -1;
 
     public RawImage Profil_laptop;
     public RawImage Profil_computer;
@@ -19,36 +19,26 @@ public class TargetState : MonoBehaviour
     public Text Niveau_ennemi;
 
     // Use this for initialization
-    void Start()
+    void FixedUpdate()
     {
-        if (viewID != 0)
+        if (viewID != -1)
         {
             cible = PhotonView.Find(viewID).gameObject;
             info = cible.GetComponent<Personnages>();
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void OnGUI()
     {
-        if (viewID != 0 && info != null)
+        if (viewID != -1 && info != null)
         {
-            Vie_ennemi.rectTransform.sizeDelta = new Vector2(197 * (info.Vie / info.VieMax), 6);
-            if (Vie_ennemi.rectTransform.sizeDelta.x >= 0)
-                Vie_ennemi.transform.position = new Vector2(Screen.width - 10 - 104 - Vie_ennemi.rectTransform.sizeDelta.x / 2, Screen.height - 10 - 43);
-
-            if (info.Types == PlayerInfo.TYPES.Computer)
+            if (info.Type == PlayerInfo.TYPES.Computer)
             {
                 Profil_computer.enabled = true;
                 Profil_computer.rectTransform.sizeDelta = new Vector2(350, 100);
                 Profil_computer.transform.position = new Vector2(Screen.width - 10 - 175, Screen.height - 10 - 50);
             }
-            else if (info.Types == PlayerInfo.TYPES.Laptop)
+            else if (info.Type == PlayerInfo.TYPES.Laptop)
             {
                 Profil_laptop.enabled = true;
                 Profil_laptop.rectTransform.sizeDelta = new Vector2(350, 100);
@@ -60,6 +50,10 @@ public class TargetState : MonoBehaviour
                 Profil_server.rectTransform.sizeDelta = new Vector2(350, 100);
                 Profil_server.transform.position = new Vector2(Screen.width - 10 - 175, Screen.height - 10 - 50);
             }
+
+            Vie_ennemi.rectTransform.sizeDelta = new Vector2(197 * (info.Vie / info.VieMax), 6);
+            if (Vie_ennemi.rectTransform.sizeDelta.x >= 0)
+                Vie_ennemi.transform.position = new Vector2(Screen.width - 10 - 104 - Vie_ennemi.rectTransform.sizeDelta.x / 2, Screen.height - 10 - 43);
 
             Vie_ennemi.enabled = true;
             Mana_ennemi.enabled = true;
@@ -77,6 +71,7 @@ public class TargetState : MonoBehaviour
 
     public int ViewID
     {
+        get { return viewID; }
         set { viewID = value; }
     }
 

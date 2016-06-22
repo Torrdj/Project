@@ -8,9 +8,9 @@ public class Laptop : Personnages
 
     new void Start()
     {
-        types = PlayerInfo.TYPES.Laptop;
         base.Start();
 
+        type = PlayerInfo.TYPES.Laptop;
         if (tag == "Player")
         {
             if (myView.isMine)
