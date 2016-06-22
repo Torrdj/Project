@@ -8,6 +8,7 @@ public class Laptop : Personnages
 
     new void Start()
     {
+        types = PlayerInfo.TYPES.Laptop;
         base.Start();
 
         if (tag == "Player")

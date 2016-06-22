@@ -16,6 +16,7 @@ public class Server : Personnages
     // Use this for initialization
     new void Start()
     {
+        types = PlayerInfo.TYPES.Server;
         base.Start();
 
         if (tag == "Player")

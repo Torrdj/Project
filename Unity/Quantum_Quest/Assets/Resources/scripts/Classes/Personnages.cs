@@ -6,6 +6,9 @@ public class Personnages : MonoBehaviour
 {
     protected PhotonView myView;
     protected PlayerInfo info;
+    protected PlayerInfo.TYPES types;
+
+    protected TargetState targetstate;
     
     protected GameObject EnnemiProfile;
 
@@ -74,6 +77,8 @@ public class Personnages : MonoBehaviour
                     {
                         cible = hit.collider.gameObject.GetComponentInParent<PhotonView>().viewID;
                         EnnemiProfile.SetActive(true);
+                        targetstate = GameObject.Find("EnnemiProfile").GetComponent<TargetState>();
+                        targetstate.ViewID = cible;
                     }
                     else
                     {
@@ -139,6 +144,11 @@ public class Personnages : MonoBehaviour
     {
         get { return _dead; }
         set { _dead = value; }
+    }
+
+    public PlayerInfo.TYPES Types
+    {
+        get { return types; }
     }
 
     public bool isLoad
