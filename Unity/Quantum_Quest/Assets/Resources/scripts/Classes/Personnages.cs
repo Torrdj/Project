@@ -11,7 +11,7 @@ public class Personnages : MonoBehaviour
 
     protected int cible = -1;
     
-    public float m_vie, m_vieMax,
+    protected float m_vie, m_vieMax,
         m_mana, m_manaMax,
         m_attaque, m_defense,
         m_vitesseAtt;
@@ -32,7 +32,8 @@ public class Personnages : MonoBehaviour
             if (myView.isMine)
             {
                 tag = "Player";//Just in case...
-                
+
+                m_name = info.Name;
                 m_vieMax = 1000; m_vie = m_vieMax;
                 m_manaMax = 1000; m_mana = m_manaMax;
                 m_attaque = 50; m_defense = 20;
@@ -82,13 +83,12 @@ public class Personnages : MonoBehaviour
                 }
             }
 
-            if (!isDead && cible != -1)
+            if (!isDead && !IsParalysed)
             {
                 if (isLoad)
                 {
-                    if (Input.GetKey(KeyCode.Alpha1))
+                    if (cible != -1 && Input.GetKey(KeyCode.Alpha1))
                     {
-                        Debug.Log("1");
                         coupDeMolette(cible);
                         StartCoroutine(Loading());
                     }
@@ -110,7 +110,7 @@ public class Personnages : MonoBehaviour
     {
         GameObject cible = PhotonView.Find(viewID).gameObject;
 
-        cible.SendMessage("receiveDamages", 50);
+        cible.SendMessage("receiveDamages", m_attaque);
 
         if (GetComponent<PhotonView>().isMine)
         {
@@ -138,17 +138,19 @@ public class Personnages : MonoBehaviour
     public bool isDead
     {
         get { return _dead; }
+        set { _dead = value; }
     }
 
     public bool isLoad
     {
         get { return _isLoad; }
+        set { _isLoad = value; }
     }
 
     public float Defense
     {
         get { return m_defense; }
-        private set { m_defense = value; }
+        set { m_defense = value; }
     }
 
     protected void UpdateDef(float def)
@@ -156,30 +158,48 @@ public class Personnages : MonoBehaviour
         m_defense = def;
     }
 
+    protected void UpdateVit(float vit)
+    {
+        m_vitesseAtt = vit;
+    }
+
     public bool IsParalysed
     {
         get { return m_isParalyzed; }
+        set { m_isParalyzed = value; }
     }
 
-    protected float Vie
+    public float Vie
     {
         get { return m_vie; }
         set { m_vie = value; }
     }
 
-    protected float VieMax
+    public float VieMax
     {
         get { return m_vieMax; }
         set { m_vieMax = value; }
     }
 
-    protected float Mana
+    public float Mana
     {
         get { return m_mana; }
         set { m_mana = value; }
     }
 
-    protected float VitAtt
+    public float ManaMax
+    {
+        get { return m_manaMax; }
+        set { m_manaMax = value; }
+    }
+
+    public float Attack
+    {
+        get { return m_attaque; }
+        set { m_attaque = value; }
+    }
+
+    public float VitAtt
     {
         get { return m_vitesseAtt; }
         set { m_vitesseAtt = value; }

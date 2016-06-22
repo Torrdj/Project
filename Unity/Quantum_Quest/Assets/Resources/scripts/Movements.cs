@@ -43,7 +43,9 @@ public class Movements : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (myView.isMine && !intJeu.MenuOpen && !GetComponentInParent<Personnages>().isDead)
+        if (myView.isMine && !intJeu.MenuOpen 
+            && !GetComponentInParent<Personnages>().isDead
+            && !GetComponentInParent<Personnages>().IsParalysed)
         {
             if (Camera_move.buttonDown)
             {

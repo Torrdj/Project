@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Laptop : Personnages
 {
-    public bool turbo_load = true;
-    public bool spyware_load = true;
+    protected bool turbo_load = true;
+    protected bool spyware_load = true;
 
     new void Start()
     {
@@ -27,19 +27,17 @@ public class Laptop : Personnages
     {
         base.FixedUpdate();
 
-        if (!isDead && cible != -1)
+        if (!isDead && !IsParalysed)
         {
             if (isLoad)
             {
                 if (turbo_load && Input.GetKey(KeyCode.Alpha2))
                 {
-                    Debug.Log("2");
                     turboBoostRPC(cible);
                     StartCoroutine(Loading());
                 }
-                else if (spyware_load && Input.GetKey(KeyCode.Alpha3))
+                else if (spyware_load && cible != -1 && Input.GetKey(KeyCode.Alpha3))
                 {
-                    Debug.Log("3");
                     spyware(cible);
                     StartCoroutine(Loading());
                 }
@@ -94,10 +92,12 @@ public class Laptop : Personnages
         float oldDef = cible.GetComponent<Personnages>().Defense;
         float newDef = oldDef * 0.9f;
 
-        float damages = (150 / 30) + oldDef;
+        float damages = ((150 - oldDef) / 30) + oldDef;
         StartCoroutine(ApplyDamages(cible, damages));
         
-        StartCoroutine(Spying(cible, newDef, oldDef, 5));
+        StartCoroutine(Spying(cible, newDef, oldDef));
+
+        StartCoroutine(LoadingSpyware());
 
         if (GetComponent<PhotonView>().isMine)
         {
@@ -109,17 +109,22 @@ public class Laptop : Personnages
     {
         for (int i = 0; i < 30; i++)
         {
-            yield return new WaitForSeconds(0.167f);
+            yield return new WaitForSeconds(0.334f);
             cible.SendMessage("receiveDamages", damages);
-        }
+        }//30 frappes sur 10s
     }
 
-    IEnumerator Spying(GameObject cible, float newDef, float oldDef, float time)
+    IEnumerator Spying(GameObject cible, float newDef, float oldDef)
     {
         cible.SendMessage("UpdateDef", newDef);
-        spyware_load = false;
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(5);
         cible.SendMessage("UpdateDef", oldDef);
+    }
+
+    IEnumerator LoadingSpyware()
+    {
+        spyware_load = false;
+        yield return new WaitForSeconds(15);
         spyware_load = true;
     }
     #endregion

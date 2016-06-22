@@ -69,7 +69,7 @@ public class Camera_move : MonoBehaviour
         if (myView.isMine && !intJeu.MenuOpen)
         {
             //Move the Player with left & right button press together
-            if (!player.isDead
+            if (!player.isDead && !player.IsParalysed
                 && Input.GetMouseButton(1) && Input.GetMouseButton(0))
             {
                 float targetRotationAngle = target.eulerAngles.y;
@@ -108,7 +108,8 @@ public class Camera_move : MonoBehaviour
                 Cursor.visible = false;
             }
             //Reset the camera angle and Rotate the Target Around the World!
-            else if (!player.isDead && Input.GetMouseButton(1))
+            else if (!player.isDead && !player.IsParalysed
+                && Input.GetMouseButton(1))
             {
                 float targetRotationAngle = target.eulerAngles.y;
                 float currentRotationAngle = transform.eulerAngles.y;
