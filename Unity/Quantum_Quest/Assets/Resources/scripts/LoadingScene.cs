@@ -20,10 +20,10 @@ public class LoadingScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Load_Bordure.transform.position = new Vector2(Screen.width / 2, Screen.height / 2 - 178);
+        Load_Bordure.transform.position = new Vector2(Screen.width / 2, 20);
         progress = Application.GetStreamProgressForLevel("first");
         load.rectTransform.sizeDelta = new Vector2(490 * progress, load.rectTransform.sizeDelta.y);
-        load.transform.position = new Vector2(Screen.width / 2 - 245 + load.rectTransform.sizeDelta.x / 2, Screen.height / 2 - 178);
+        load.transform.position = new Vector2(Screen.width / 2 - 245 + load.rectTransform.sizeDelta.x / 2, 20);
 
         if (progress == 1)
         {

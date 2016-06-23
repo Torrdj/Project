@@ -34,7 +34,6 @@ public class Personnages : MonoBehaviour
         myView = gameObject.GetComponent<PhotonView>();
         info = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
         EnnemiProfile = GameObject.Find("EnnemiProfile");
-        GameObject.Find("PlayerProfile").GetComponent<PlayerState>().ViewID = myView.viewID;
 
         if (tag == "Player")
         {
@@ -47,6 +46,7 @@ public class Personnages : MonoBehaviour
                 m_manaMax = 1000; m_mana = m_manaMax;
                 m_attaque = 50; m_defense = 20;
                 m_vitesseAtt = 1.0f;
+                GameObject.Find("PlayerProfile").GetComponent<PlayerState>().ViewID = myView.viewID;
 
                 EnnemiProfile.SetActive(false);
 

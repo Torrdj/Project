@@ -36,6 +36,7 @@ public class PlayerState : MonoBehaviour
 
     void OnGUI()
     {
+        
         if (viewID != -1)
         {
             info = PhotonView.Find(viewID).GetComponent<Personnages>();
@@ -51,7 +52,7 @@ public class PlayerState : MonoBehaviour
             {
                 if (list_buff[a])
                 {
-                    if (GUI.Button(new Rect(5 + (i + 1) * 2 + i * (25), 100, 25, 25), "", list_GuistyleBuff[a]))
+                    if (GUI.Button(new Rect(5 + (i + 1) * 2 + i * (25), 110, 25, 25), "", list_GuistyleBuff[a]))
                     {
 
                     }
@@ -59,7 +60,6 @@ public class PlayerState : MonoBehaviour
                 }
             }
         }
-
 
         Vie.rectTransform.sizeDelta = new Vector2(197 * (playerinfo.Vie / playerinfo.VieMax), 6);
         if (Vie.rectTransform.sizeDelta.x >= 0)

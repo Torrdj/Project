@@ -31,7 +31,7 @@ public class Computer : Personnages
         {
             if (isLoad)
             {
-                if(failuresystem_load && cible != -1 && Input.GetKey(KeyCode.Alpha2))
+                if (failuresystem_load && cible != -1 && Input.GetKey(KeyCode.Alpha2))
                 {
                     failureSystem(cible);
                     StartCoroutine(Loading());
@@ -88,6 +88,7 @@ public class Computer : Personnages
         {
             myView.RPC("trojan", PhotonTargets.OthersBuffered, viewID);
         }
+
     }
 
     IEnumerator Infect(GameObject cible, float newVit, float oldVit)

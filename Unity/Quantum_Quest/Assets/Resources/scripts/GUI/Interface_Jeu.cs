@@ -223,13 +223,13 @@ public class Interface_Jeu : MonoBehaviour
 
         if (player.Type == PlayerInfo.TYPES.Computer)
         {
-            ListGuiButtonAttack[1].normal.background = ListTexture2D[18];
-            ListGuiButtonAttack[1].active.background = ListTexture2D[19];
-            ListGuiButtonAttack[1].hover.background = ListTexture2D[20];
+            ListGuiButtonAttack[1].normal.background = ListTexture2D[6];
+            ListGuiButtonAttack[1].active.background = ListTexture2D[7];
+            ListGuiButtonAttack[1].hover.background = ListTexture2D[8];
 
-            ListGuiButtonAttack[2].normal.background = ListTexture2D[6];
-            ListGuiButtonAttack[2].active.background = ListTexture2D[7];
-            ListGuiButtonAttack[2].hover.background = ListTexture2D[8];
+            ListGuiButtonAttack[2].normal.background = ListTexture2D[18];
+            ListGuiButtonAttack[2].active.background = ListTexture2D[19];
+            ListGuiButtonAttack[2].hover.background = ListTexture2D[20];
         }
         if (player.Type == PlayerInfo.TYPES.Server)
         {

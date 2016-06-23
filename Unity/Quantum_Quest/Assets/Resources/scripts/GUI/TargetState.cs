@@ -27,8 +27,7 @@ public class TargetState : MonoBehaviour
     {
         if (viewID != -1)
         {
-            cible = PhotonView.Find(viewID).gameObject;
-            info = cible.GetComponent<Personnages>();
+            info = PhotonView.Find(viewID).GetComponent<Personnages>();
         }
     }
 
@@ -48,7 +47,7 @@ public class TargetState : MonoBehaviour
             {
                 if (list_buff[a])
                 {
-                    if (GUI.Button(new Rect(Screen.width - 350 + (i + 1) * 2 + i * (25), 100, 25, 25), "", list_GuistyleBuff[a])) 
+                    if (GUI.Button(new Rect(Screen.width - 350 + (i + 1) * 2 + i * (25), 110, 25, 25), "", list_GuistyleBuff[a])) 
                     {
 
                     }
