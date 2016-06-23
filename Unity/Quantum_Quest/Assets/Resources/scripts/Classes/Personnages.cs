@@ -18,15 +18,23 @@ public class Personnages : MonoBehaviour
         m_vitesseAtt;
 
     public string m_name;
-    public bool m_isParalyzed = false;
     public bool _isLoad = true;
     public bool _dead = false;
+
+    public bool m_isParalyzed = false;
+
+    public bool turbo_boost_isactiavte = false;
+    public bool Dot_isactive = false;
+    public bool def_isreduced = false;
+    public bool speed_isreduced = false;
+    public bool def_isincrese = false;
 
     public void Start()
     {
         myView = gameObject.GetComponent<PhotonView>();
         info = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
         EnnemiProfile = GameObject.Find("EnnemiProfile");
+        GameObject.Find("PlayerProfile").GetComponent<PlayerState>().ViewID = myView.viewID;
 
         if (tag == "Player")
         {
@@ -165,11 +173,34 @@ public class Personnages : MonoBehaviour
 
     protected void UpdateDef(float def)
     {
+        if (def_isreduced)
+            def_isreduced = false;
+        else if (def_isincrese)
+            def_isincrese = false;
+        else if (!def_isincrese && !def_isreduced && def > m_defense)
+            def_isincrese = true;
+        else if (!def_isincrese && !def_isreduced && def < m_defense)
+            def_isreduced = true;
+
+
         m_defense = def;
+    }
+
+    protected void Update_DoT()
+    {
+        if (Dot_isactive)
+            Dot_isactive = false;
+        else
+            Dot_isactive = true;
     }
 
     protected void UpdateVit(float vit)
     {
+        if (speed_isreduced)
+            speed_isreduced = false;
+        else
+            speed_isreduced = true;
+
         m_vitesseAtt = vit;
     }
 

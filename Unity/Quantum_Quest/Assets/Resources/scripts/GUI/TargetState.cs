@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TargetState : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class TargetState : MonoBehaviour
     public Text Name_ennemi;
     public Text Niveau_ennemi;
 
+    private List<bool> list_buff = new List<bool>(6);
+    public List<GUIStyle> list_GuistyleBuff;
+
     // Use this for initialization
     void FixedUpdate()
     {
@@ -32,6 +36,31 @@ public class TargetState : MonoBehaviour
     {
         if (viewID != -1 && info != null)
         {
+            list_buff = new List<bool>(6);
+            list_buff.Add(info.turbo_boost_isactiavte);
+            list_buff.Add(info.Dot_isactive);
+            list_buff.Add(info.def_isreduced);
+            list_buff.Add(info.speed_isreduced);
+            list_buff.Add(info.m_isParalyzed);
+            list_buff.Add(info.def_isincrese);
+            int i = 0;
+            for(int a = 0; a < list_buff.Count; a+=1)
+            {
+                if (list_buff[a])
+                {
+                    if (GUI.Button(new Rect(Screen.width - 350 + (i + 1) * 2 + i * (25), 100, 25, 25), "", list_GuistyleBuff[a])) 
+                    {
+
+                    }
+                    i += 1;
+                }
+            }
+
+
+            Vie_ennemi.rectTransform.sizeDelta = new Vector2(197 * (info.Vie / info.VieMax), 6);
+            if (Vie_ennemi.rectTransform.sizeDelta.x >= 0)
+                Vie_ennemi.transform.position = new Vector2(Screen.width - 10 - 104 - Vie_ennemi.rectTransform.sizeDelta.x / 2, Screen.height - 10 - 43);
+
             if (info.Type == PlayerInfo.TYPES.Computer)
             {
                 Profil_computer.enabled = true;
@@ -51,9 +80,7 @@ public class TargetState : MonoBehaviour
                 Profil_server.transform.position = new Vector2(Screen.width - 10 - 175, Screen.height - 10 - 50);
             }
 
-            Vie_ennemi.rectTransform.sizeDelta = new Vector2(197 * (info.Vie / info.VieMax), 6);
-            if (Vie_ennemi.rectTransform.sizeDelta.x >= 0)
-                Vie_ennemi.transform.position = new Vector2(Screen.width - 10 - 104 - Vie_ennemi.rectTransform.sizeDelta.x / 2, Screen.height - 10 - 43);
+
 
             Vie_ennemi.enabled = true;
             Mana_ennemi.enabled = true;

@@ -111,8 +111,10 @@ public class Server : Personnages
     IEnumerator UpdateDefense(float newDef, float oldDef)
     {
         Defense = newDef;
+        def_isincrese = true;
         yield return new WaitForSeconds(5);
         Defense = oldDef;
+        def_isincrese = false;
     }
 
     IEnumerator LoadingFirewall()

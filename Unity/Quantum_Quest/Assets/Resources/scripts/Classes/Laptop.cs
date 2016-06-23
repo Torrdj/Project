@@ -72,8 +72,10 @@ public class Laptop : Personnages
     IEnumerator UpdateSpeed(float newSpeed, float oldSpeed, float time)
     {
         m_vitesseAtt = newSpeed;
+        turbo_boost_isactiavte = true;
         yield return new WaitForSeconds(time);
         m_vitesseAtt = oldSpeed;
+        turbo_boost_isactiavte = false;
     }
 
     IEnumerator LoadingTurbo(float time)
@@ -108,11 +110,13 @@ public class Laptop : Personnages
 
     IEnumerator ApplyDamages(GameObject cible, float damages)
     {
+        cible.SendMessage("Update_DoT");
         for (int i = 0; i < 30; i++)
         {
             yield return new WaitForSeconds(0.334f);
             cible.SendMessage("receiveDamages", damages);
         }//30 frappes sur 10s
+        cible.SendMessage("Update_DoT");
     }
 
     IEnumerator Spying(GameObject cible, float newDef, float oldDef)

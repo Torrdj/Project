@@ -34,6 +34,7 @@ public class Menu : MonoBehaviour
     private bool menu4 = false;
     private int tourner = 1;
     private bool resolution = false;
+    public Text warning;
 
     public Text DescriptionPersonnage;
     public Text Titre;
@@ -231,16 +232,45 @@ public class Menu : MonoBehaviour
                 //ntHUD.offsetX = Screen.width / 2 - 100;
                 //ntHUD.offsetY = Screen.height / 3;
 
+
+
                 Pseudo_ = GUI.TextArea(new Rect(Screen.width / 2 - 75, Screen.height / 2 - 11, 150, 22), Pseudo_, 200);
 
-                if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), (Screen.height / 2) - (buttonHeight / 2) + 150, buttonWidth, buttonHeight), "Start", GuiButton))
+                if (Input.GetKey(KeyCode.Return))
                 {
-                    player.Name = Pseudo_;
-                    PlayerPrefs.SetInt("Son", (int)musicVol);
-                    GameObject.Find("NetworkHolder").GetComponent<NetworkController>().enabled = true;
+                    if (Pseudo_ != "")
+                    {
+                        warning.enabled = false;
+                        player.Name = Pseudo_;
+                        PlayerPrefs.SetInt("Son", (int)musicVol);
+                        GameObject.Find("NetworkHolder").GetComponent<NetworkController>().enabled = true;
 
-                    //SceneManager.LoadSceneAsync("first");
-                    SceneManager.LoadScene("loadingScene");
+                        //SceneManager.LoadSceneAsync("first");
+                        SceneManager.LoadScene("loadingScene");
+                    }
+                    else
+                    {
+                        warning.enabled = true;
+                    }
+                }
+
+                    if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), (Screen.height / 2) - (buttonHeight / 2) + 150, buttonWidth, buttonHeight), "Start", GuiButton))
+                {
+                    if (Pseudo_ != "")
+                    {
+                        warning.enabled = false;
+                        player.Name = Pseudo_;
+                        PlayerPrefs.SetInt("Son", (int)musicVol);
+                        GameObject.Find("NetworkHolder").GetComponent<NetworkController>().enabled = true;
+
+                        //SceneManager.LoadSceneAsync("first");
+                        SceneManager.LoadScene("loadingScene");
+                    }
+                    else
+                    {
+                        warning.enabled = true;
+                    }
+
                 }
 
                 if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
@@ -338,6 +368,6 @@ public class Menu : MonoBehaviour
 
 
     }
-    
+
 
 }
