@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
         myView = gameObject.GetComponent<PhotonView>();
         EnnemiProfile = GameObject.Find("EnnemiProfile");
 
-        if (tag == "Ennemis")
+        if (tag == "Player")
         {
             tag = "Player";//Just in case...
 

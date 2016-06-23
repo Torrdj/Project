@@ -28,6 +28,11 @@ public class Menu : MonoBehaviour
     //button
     public GUIStyle GuiButton;
 
+    public GameObject Map;
+    public GameObject laptop;
+    public GameObject computer;
+    public GameObject server;
+
     private bool menu1 = true;
     private bool menu2 = false;
     private bool menu3 = false;
@@ -56,7 +61,8 @@ public class Menu : MonoBehaviour
 
     void Start()
     {
-        fullscreen = !Screen.fullScreen;
+        Map.SetActive(true);
+        fullscreen = Screen.fullScreen;
         //multijoueur
         Cursor.visible = true;
         //ntHUD = FindObjectOfType<NetworkManagerHUD>();
@@ -68,7 +74,6 @@ public class Menu : MonoBehaviour
     void OnGUI()
     {
         //int sizeButtonX = 250;
-
         //taille par defaut des boutons
         const int buttonWidth = 100;
         const int buttonHeight = 50;
@@ -145,16 +150,22 @@ public class Menu : MonoBehaviour
                 switch (i)
                 {
                     case 0:
+                        laptop.SetActive(true);
+                        server.SetActive(false);
                         //ListePersonnage[2].SetActive(false);
                         //ListePersonnage[0].SetActive(true);
                         DescriptionPersonnage.text = Laptop;
                         break;
                     case 1:
+                        computer.SetActive(true);
+                        laptop.SetActive(false);
                         //ListePersonnage[0].SetActive(false);
                         //ListePersonnage[1].SetActive(true);
                         DescriptionPersonnage.text = Computer;
                         break;
                     case 2:
+                        computer.SetActive(false);
+                        server.SetActive(true);
                         //ListePersonnage[1].SetActive(false);
                         //ListePersonnage[2].SetActive(true);
                         DescriptionPersonnage.text = Server;
@@ -183,8 +194,9 @@ public class Menu : MonoBehaviour
                     //network.playerPrefab = networkPlayer[i];
                     //network.gameObject.GetComponent<PlayerInfo>().prefab_name = networkPlayer[i].name;
                     Titre.enabled = false;
-                    //foreach (GameObject x in ListePersonnage)
-                    //    x.SetActive(false);
+                    laptop.SetActive(false);
+                    computer.SetActive(false);
+                    server.SetActive(false);
                     FondTexte.enabled = false;
                     DescriptionPersonnage.enabled = false;
                     menu2 = false;
@@ -194,8 +206,9 @@ public class Menu : MonoBehaviour
                 if (GUI.Button(new Rect((Screen.width - 75) - (buttonWidth / 2), (Screen.height - 50) - (buttonHeight / 2), buttonWidth, buttonHeight), "Retour", GuiButton))
                 {
                     Titre.enabled = false;
-                    //foreach (GameObject x in ListePersonnage)
-                    //    x.SetActive(false);
+                    laptop.SetActive(false);
+                    computer.SetActive(false);
+                    server.SetActive(false);
                     FondTexte.enabled = false;
                     DescriptionPersonnage.enabled = false;
                     menu2 = false;
