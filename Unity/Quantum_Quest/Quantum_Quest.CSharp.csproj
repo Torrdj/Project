@@ -221,6 +221,8 @@
     <Compile Include="Assets\Resources\scripts\Camera_move.cs" />
     <Compile Include="Assets\Resources\scripts\ChangeScene.cs" />
     <Compile Include="Assets\Resources\scripts\Classes\Computer.cs" />
+    <Compile Include="Assets\Resources\scripts\Classes\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Resources\scripts\Classes\Enemy\EnemySync.cs" />
     <Compile Include="Assets\Resources\scripts\Classes\Laptop.cs" />
     <Compile Include="Assets\Resources\scripts\Classes\Personnages.cs" />
     <Compile Include="Assets\Resources\scripts\Classes\Server.cs" />

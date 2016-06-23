@@ -2,22 +2,20 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Personnages : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     protected PhotonView myView;
-    protected PlayerInfo info;
-    protected PlayerInfo.TYPES type;
 
     protected GameObject EnnemiProfile;
 
     protected int cible = -1;
 
-    protected float m_vie, m_vieMax,
+    private float m_vie, m_vieMax,
         m_mana, m_manaMax,
         m_attaque, m_defense,
         m_vitesseAtt;
 
-    public string m_name;
+    public string m_name = "Ennemi";
     public bool _isLoad = true;
     public bool _dead = false;
 
@@ -32,32 +30,23 @@ public class Personnages : MonoBehaviour
     public void Start()
     {
         myView = gameObject.GetComponent<PhotonView>();
-        info = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
         EnnemiProfile = GameObject.Find("EnnemiProfile");
 
-        if (tag == "Player")
+        if (tag == "Ennemis")
         {
-            if (myView.isMine)
-            {
-                tag = "Player";//Just in case...
+            tag = "Player";//Just in case...
 
-                m_name = info.Name;
-                m_vieMax = 1000; m_vie = m_vieMax;
-                m_manaMax = 1000; m_mana = m_manaMax;
-                m_attaque = 50; m_defense = 20;
-                m_vitesseAtt = 1.0f;
-                GameObject.Find("PlayerProfile").GetComponent<PlayerState>().ViewID = myView.viewID;
+            m_vieMax = 1000; m_vie = m_vieMax;
+            m_manaMax = 1000; m_mana = m_manaMax;
+            m_attaque = 50; m_defense = 20;
+            m_vitesseAtt = 1.0f;
+            //GameObject.Find("PlayerProfile").GetComponent<PlayerState>().ViewID = myView.viewID;
 
-                EnnemiProfile.SetActive(false);
+            //EnnemiProfile.SetActive(false);
 
-                info.Vie = m_vie; info.VieMax = m_vieMax;
-                m_name = info.Name;
-            }
-            else
-            {
-                tag = "Ennemis";
-            }
         }
+
+
     }
 
     public void FixedUpdate()
@@ -89,6 +78,7 @@ public class Personnages : MonoBehaviour
                     else
                     {
                         cible = -1;
+
                         EnnemiProfile.GetComponent<TargetState>().ViewID = cible;
                         EnnemiProfile.SetActive(false);
                     }
@@ -142,8 +132,8 @@ public class Personnages : MonoBehaviour
         if (m_vie >= m_vieMax)
             m_vie = m_vieMax;
 
-        if (myView.isMine)
-            info.Vie = m_vie;
+
+
     }
 
     #region Getters/Setters
@@ -151,11 +141,6 @@ public class Personnages : MonoBehaviour
     {
         get { return _dead; }
         set { _dead = value; }
-    }
-
-    public PlayerInfo.TYPES Type
-    {
-        get { return type; }
     }
 
     public bool isLoad

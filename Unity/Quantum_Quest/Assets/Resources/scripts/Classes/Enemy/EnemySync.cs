@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerSync : MonoBehaviour
+public class EnemySync : MonoBehaviour
 {
 
     string updatedName;
@@ -31,7 +31,7 @@ public class PlayerSync : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, this.correctPlayerPos, Time.deltaTime * 10);
             transform.rotation = Quaternion.Lerp(transform.rotation, this.correctPlayerRot, Time.deltaTime * 10);
-            
+
             player.m_name = updatedName;
             player.Vie = updatedLife; player.VieMax = updatedLifeMax;
             player.Mana = updatedMana; player.ManaMax = updatedManaMax;
