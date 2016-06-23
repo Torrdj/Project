@@ -91,25 +91,25 @@ public class Menu : MonoBehaviour
             {
                 Titre.enabled = true;
                 Titre.text = "Quantum Quest";
-                if (GUI.Button(new Rect(Screen.width / 2 - ((buttonWidth + 50) / 2), (2 * Screen.height / 6) - (buttonHeight / 2), buttonWidth + 50, buttonHeight), "Nouveau personnage", GuiButton))
+                if (GUI.Button(new Rect(Screen.width / 2 - ((buttonWidth + 50) / 2), Screen.height / 2 - 150, buttonWidth + 50, buttonHeight), "Nouveau personnage", GuiButton))
                 {
                     Titre.enabled = false;
                     menu1 = false;
                     menu2 = true;
                     tourner = 1;
                 }
-                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (3 * Screen.height / 6) - (buttonHeight / 2), buttonWidth, buttonHeight), "Charger", GuiButton))
+                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), Screen.height / 2 - 50, buttonWidth, buttonHeight), "Charger", GuiButton))
                 {
 
                 }
-                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (4 * Screen.height / 6) - (buttonHeight / 2), buttonWidth, buttonHeight), "Options", GuiButton))
+                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), Screen.height / 2 + 50, buttonWidth, buttonHeight), "Options", GuiButton))
                 {
                     Titre.enabled = false;
                     menu1 = false;
                     menu4 = true;
                     tourner = -1;
                 }
-                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), (5 * Screen.height / 6) - (buttonHeight / 2), buttonWidth, buttonHeight), "Quitter", GuiButton))
+                if (GUI.Button(new Rect(Screen.width / 2 - (buttonWidth / 2), Screen.height / 2 + 150, buttonWidth, buttonHeight), "Quitter", GuiButton))
                 {
                     Application.Quit();
                 }
