@@ -31,13 +31,19 @@ public class Computer : Personnages
         {
             if (isLoad)
             {
-                if (failuresystem_load && cible != -1 && Input.GetKey(KeyCode.Alpha2))
+                if (failuresystem_load && cible != -1 
+                    && Input.GetKey(KeyCode.Alpha2)
+                    && checkMana(40))
                 {
+                    updateManaRPC(40);
                     failureSystem(cible);
                     StartCoroutine(Loading());
                 }
-                else if (trojan_load && cible != -1 && Input.GetKey(KeyCode.Alpha3))
+                else if (trojan_load && cible != -1 
+                    && Input.GetKey(KeyCode.Alpha3)
+                    && checkMana(25))
                 {
+                    updateManaRPC(25);
                     trojan(cible);
                     StartCoroutine(Loading());
                 }
@@ -50,7 +56,7 @@ public class Computer : Personnages
     void failureSystem(int viewID)
     {
         GameObject cible = PhotonView.Find(viewID).gameObject;
-
+        
         cible.SendMessage("receiveDamages", 200 + m_attaque);
 
         StartCoroutine(LoadingFailure());
@@ -74,7 +80,7 @@ public class Computer : Personnages
     void trojan(int viewID)
     {
         GameObject cible = PhotonView.Find(viewID).gameObject;
-
+        
         cible.SendMessage("receiveDamages", 100 + m_attaque);
 
         float oldVit = cible.GetComponent<Personnages>().VitAtt;

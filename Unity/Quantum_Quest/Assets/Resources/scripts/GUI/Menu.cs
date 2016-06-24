@@ -247,7 +247,7 @@ public class Menu : MonoBehaviour
 
 
 
-                Pseudo_ = GUI.TextArea(new Rect(Screen.width / 2 - 75, Screen.height / 2 - 11, 150, 22), Pseudo_, 200);
+                Pseudo_ = GUI.TextField(new Rect(Screen.width / 2 - 75, Screen.height / 2 - 11, 150, 22), Pseudo_, 200);
 
                 if (Input.GetKey(KeyCode.Return))
                 {
@@ -258,7 +258,7 @@ public class Menu : MonoBehaviour
                         PlayerPrefs.SetInt("Son", (int)musicVol);
                         GameObject.Find("NetworkHolder").GetComponent<NetworkController>().enabled = true;
 
-                        //SceneManager.LoadSceneAsync("first");
+                        player.SceneToLoad = "first";
                         SceneManager.LoadScene("loadingScene");
                     }
                     else
@@ -276,7 +276,7 @@ public class Menu : MonoBehaviour
                         PlayerPrefs.SetInt("Son", (int)musicVol);
                         GameObject.Find("NetworkHolder").GetComponent<NetworkController>().enabled = true;
 
-                        //SceneManager.LoadSceneAsync("first");
+                        player.SceneToLoad = "first";
                         SceneManager.LoadScene("loadingScene");
                     }
                     else

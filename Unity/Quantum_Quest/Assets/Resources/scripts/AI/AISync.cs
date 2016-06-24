@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerSync : MonoBehaviour
+public class AISync : MonoBehaviour
 {
+    /*
     string updatedName;
     float updatedLife, updatedLifeMax,
         updatedMana, updatedManaMax,
@@ -14,13 +15,13 @@ public class PlayerSync : MonoBehaviour
     Quaternion correctPlayerRot;
 
     PhotonView myView;
-    Personnages player;
+    AIPersonnages player;
 
     // Use this for initialization
     void Start()
     {
         myView = this.gameObject.GetComponent<PhotonView>();
-        player = GetComponent<Personnages>();
+        player = GetComponent<AIPersonnages>();
     }
 
     // Update is called once per frame
@@ -30,7 +31,7 @@ public class PlayerSync : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, this.correctPlayerPos, Time.deltaTime * 10);
             transform.rotation = Quaternion.Lerp(transform.rotation, this.correctPlayerRot, Time.deltaTime * 10);
-            
+
             player.m_name = updatedName;
             player.Vie = updatedLife; player.VieMax = updatedLifeMax;
             player.Mana = updatedMana; player.ManaMax = updatedManaMax;
@@ -76,5 +77,5 @@ public class PlayerSync : MonoBehaviour
             updatedIsLoad = (bool)stream.ReceiveNext();
             updatedDead = (bool)stream.ReceiveNext();
         }
-    }
+    }*/
 }

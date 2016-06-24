@@ -1,56 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Laptop : Personnages
+public class AILaptop : AIPersonnages
 {
     protected bool turbo_load = true;
     protected bool spyware_load = true;
 
-    new void Start()
-    {
+    // Use this for initialization
+    new void Start () {
         base.Start();
 
         type = PlayerInfo.TYPES.Laptop;
-        if (tag == "Player")
-        {
-            if (myView.isMine)
-            {
-                m_vieMax *= 0.9f; m_vie = m_vieMax;
-                m_vitesseAtt *= 0.5f;
-                m_attaque *= 0.9f;
 
-                info.Vie = m_vie; info.VieMax = m_vieMax;
-            }
-        }
+        m_name = "Laptop ennemi";
+        m_vieMax *= 0.9f; m_vie = m_vieMax;
+        m_vitesseAtt *= 0.5f;
+        m_attaque *= 0.9f;
     }
-
-    new void FixedUpdate()
-    {
+	
+	// Update is called once per frame
+	new void FixedUpdate () {
         base.FixedUpdate();
-
-        if (!isDead && !IsParalysed)
-        {
-            if (isLoad)
-            {
-                if (turbo_load 
-                    && Input.GetKey(KeyCode.Alpha2)
-                    && checkMana(15))
-                {
-                    updateManaRPC(15);
-                    turboBoostRPC(cible);
-                    StartCoroutine(Loading());
-                }
-                else if (spyware_load && cible != -1 
-                    && Input.GetKey(KeyCode.Alpha3)
-                    && checkMana(30))
-                {
-                    updateManaRPC(30);
-                    spyware(cible);
-                    StartCoroutine(Loading());
-                }
-            }
-        }
-    }
+	}
 
     #region TurboBoost
     [PunRPC]
@@ -98,16 +69,12 @@ public class Laptop : Personnages
     {
         GameObject cible = PhotonView.Find(viewID).gameObject;
 
-        float oldDef;
-        if (cible.layer == 9)
-            oldDef = cible.GetComponent<AIPersonnages>().Defense;
-        else
-            oldDef = cible.GetComponent<Personnages>().Defense;
+        float oldDef = cible.GetComponent<Personnages>().Defense;
         float newDef = oldDef * 0.9f;
 
         float damages = ((150 - oldDef) / 30) + oldDef;
         StartCoroutine(ApplyDamages(cible, damages));
-        
+
         StartCoroutine(Spying(cible, newDef, oldDef));
 
         StartCoroutine(LoadingSpyware());

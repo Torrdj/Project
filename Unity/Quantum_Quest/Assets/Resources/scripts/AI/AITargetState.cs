@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class TargetState : MonoBehaviour
+public class AITargetState : MonoBehaviour
 {
     private int viewID = -1;
 
@@ -12,7 +12,7 @@ public class TargetState : MonoBehaviour
     public RawImage Profil_server;
 
     private GameObject cible;
-    private Personnages info;
+    private AIPersonnages info;
 
     public Image Vie_ennemi;
     public Image Mana_ennemi;
@@ -27,7 +27,7 @@ public class TargetState : MonoBehaviour
     {
         if (viewID != -1)
         {
-            info = PhotonView.Find(viewID).GetComponent<Personnages>();
+            info = PhotonView.Find(viewID).GetComponent<AIPersonnages>();
         }
     }
 
@@ -43,11 +43,11 @@ public class TargetState : MonoBehaviour
             list_buff.Add(info.m_isParalyzed);
             list_buff.Add(info.def_isincrese);
             int i = 0;
-            for(int a = 0; a < list_buff.Count; a+=1)
+            for (int a = 0; a < list_buff.Count; a += 1)
             {
                 if (list_buff[a])
                 {
-                    if (GUI.Button(new Rect(Screen.width - 350 + (i + 1) * 2 + i * (25), 110, 25, 25), "", list_GuistyleBuff[a])) 
+                    if (GUI.Button(new Rect(Screen.width - 350 + (i + 1) * 2 + i * (25), 110, 25, 25), "", list_GuistyleBuff[a]))
                     {
 
                     }

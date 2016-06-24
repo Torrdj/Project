@@ -9,6 +9,7 @@ public class Personnages : MonoBehaviour
     protected PlayerInfo.TYPES type;
 
     protected GameObject EnnemiProfile;
+    protected GameObject AIProfile;
 
     protected int cible = -1;
 
@@ -29,11 +30,14 @@ public class Personnages : MonoBehaviour
     public bool speed_isreduced = false;
     public bool def_isincrese = false;
 
+    float lastTime;
+
     public void Start()
     {
         myView = gameObject.GetComponent<PhotonView>();
         info = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
         EnnemiProfile = GameObject.Find("EnnemiProfile");
+        AIProfile = GameObject.Find("AIProfile");
 
         if (tag == "Player")
         {
@@ -43,15 +47,19 @@ public class Personnages : MonoBehaviour
 
                 m_name = info.Name;
                 m_vieMax = 1000; m_vie = m_vieMax;
-                m_manaMax = 1000; m_mana = m_manaMax;
+                m_manaMax = 100; m_mana = m_manaMax;
                 m_attaque = 50; m_defense = 20;
                 m_vitesseAtt = 1.0f;
                 GameObject.Find("PlayerProfile").GetComponent<PlayerState>().ViewID = myView.viewID;
 
                 EnnemiProfile.SetActive(false);
+                AIProfile.SetActive(false);
 
                 info.Vie = m_vie; info.VieMax = m_vieMax;
+                info.Mana = m_mana; info.ManaMax = m_manaMax;
                 m_name = info.Name;
+
+                lastTime = Time.fixedTime;
             }
             else
             {
@@ -62,7 +70,7 @@ public class Personnages : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (myView.isMine)
+        if (myView.isMine && gameObject.layer != 9)
         {
             if (m_vie <= 0)
             {
@@ -82,25 +90,48 @@ public class Personnages : MonoBehaviour
                     if (hit.transform.CompareTag("Ennemis"))
                     {
                         cible = hit.collider.gameObject.GetComponentInParent<PhotonView>().viewID;
-                        EnnemiProfile.SetActive(true);
-
-                        GameObject.Find("EnnemiProfile").GetComponent<TargetState>().ViewID = cible;
+                        if (hit.collider.gameObject.layer != 9)
+                        {
+                            EnnemiProfile.SetActive(true);
+                            GameObject.Find("EnnemiProfile").GetComponent<TargetState>().ViewID = cible;
+                        }
+                        else
+                        {
+                            AIProfile.SetActive(true);
+                            GameObject.Find("AIProfile").GetComponent<AITargetState>().ViewID = cible;
+                        }
                     }
                     else
                     {
                         cible = -1;
+                        if(EnnemiProfile.GetActive())
+                        {
                         EnnemiProfile.GetComponent<TargetState>().ViewID = cible;
                         EnnemiProfile.SetActive(false);
+                        }
+                        else
+                        {
+                            AIProfile.GetComponent<AITargetState>().ViewID = cible;
+                            AIProfile.SetActive(false);
+                        }
                     }
                 }
             }
 
-            if (!isDead && !IsParalysed)
+            if (!isDead)
             {
-                if (isLoad)
+                float newTime;
+                if ((newTime = Time.fixedTime) - lastTime >= 2)
                 {
-                    if (cible != -1 && Input.GetKey(KeyCode.Alpha1))
+                    updateManaRPC(-3);
+                    lastTime = newTime;
+                }
+                if (!IsParalysed && isLoad)
+                {
+                    if (cible != -1 && Input.GetKey(KeyCode.Alpha1)
+                        && checkMana(3))
                     {
+                        updateManaRPC(3);
                         coupDeMolette(cible);
                         StartCoroutine(Loading());
                     }
@@ -130,6 +161,36 @@ public class Personnages : MonoBehaviour
         }
     }
     #endregion
+
+    protected bool checkMana(float mana)
+    {
+        return mana <= m_mana;
+    }
+
+    [PunRPC]
+    public void updateManaRPC(float mana)
+    {
+        SendMessage("updateMana", mana);
+
+        if (GetComponent<PhotonView>().isMine)
+        {
+            myView.RPC("updateManaRPC", PhotonTargets.OthersBuffered, mana);
+        }
+    }
+
+    protected void updateMana(float mana)
+    {
+        m_mana -= mana;
+
+        if (m_mana >= m_manaMax)
+            m_mana = m_manaMax;
+
+        if (m_mana <= 0)
+            m_mana = 0;
+
+        if (myView.isMine)
+            info.Mana = m_mana;
+    }
 
     protected void receiveDamages(float damages)
     {
@@ -180,7 +241,6 @@ public class Personnages : MonoBehaviour
             def_isincrese = true;
         else if (!def_isincrese && !def_isreduced && def < m_defense)
             def_isreduced = true;
-
 
         m_defense = def;
     }

@@ -61,11 +61,16 @@ public class PlayerState : MonoBehaviour
             }
         }
 
+        //vie
         Vie.rectTransform.sizeDelta = new Vector2(197 * (playerinfo.Vie / playerinfo.VieMax), 6);
         if (Vie.rectTransform.sizeDelta.x >= 0)
             Vie.transform.position = new Vector2(10 + 104 + Vie.rectTransform.sizeDelta.x / 2, Screen.height - 10 - 43);
 
-        //vie
+        //mana
+        Mana.rectTransform.sizeDelta = new Vector2(197 * (playerinfo.Mana / playerinfo.ManaMax), 6);
+        if (Mana.rectTransform.sizeDelta.x >= 0)
+            Mana.transform.position = new Vector2(10 + 104 + Mana.rectTransform.sizeDelta.x / 2, Screen.height - 10 - 52);
+
         if (playerinfo.Type == PlayerInfo.TYPES.Computer)
         {
             Profil_computer.enabled = true;
@@ -91,7 +96,7 @@ public class PlayerState : MonoBehaviour
         Name.enabled = true;
 
 
-        Mana.transform.position = new Vector2(10 + 100 + 102, Screen.height - 10 - 52);
+        //Mana.transform.position = new Vector2(10 + 100 + 102, Screen.height - 10 - 52);
         Niveau.transform.position = new Vector2(10 + 82 + 102, Screen.height - 10 - 41);
         Name.transform.position = new Vector2(10 + 82 + 102, Screen.height - 10 - 30);
         Name.text = playerinfo.Name == "" ? "Bob" : playerinfo.Name;

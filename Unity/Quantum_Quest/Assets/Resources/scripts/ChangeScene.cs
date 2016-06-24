@@ -12,12 +12,13 @@ public class ChangeScene : MonoBehaviour {
         {
             case "first":
                 GameObject.Find("NetworkHolder").GetComponent<NetworkController>().lastSceneName = "first";
-                SceneManager.LoadScene("second");
+                GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>().SceneToLoad = "second";
                 break;
             case "second":
                 GameObject.Find("NetworkHolder").GetComponent<NetworkController>().lastSceneName = "second";
-                SceneManager.LoadScene("first");
+                GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>().SceneToLoad = "first";
                 break;
         }
+        SceneManager.LoadScene("loadingScene");
     }
 }

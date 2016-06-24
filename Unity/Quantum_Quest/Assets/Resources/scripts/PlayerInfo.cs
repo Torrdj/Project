@@ -16,7 +16,9 @@ public class PlayerInfo : MonoBehaviour
 
     TYPES _type;
     string _name;
-    float _vie, _vieMax;
+    float _vie, _vieMax,
+        _mana, _manaMax;
+    string sceneToLoad;
 
     // Use this for initialization
     void Start()
@@ -67,6 +69,24 @@ public class PlayerInfo : MonoBehaviour
     {
         get { return _vieMax; }
         set { _vieMax = value; }
+    }
+
+    public float Mana
+    {
+        get { return _mana; }
+        set { _mana = value; }
+    }
+
+    public float ManaMax
+    {
+        get { return _manaMax; }
+        set { _manaMax = value; }
+    }
+
+    public string SceneToLoad
+    {
+        get { return sceneToLoad; }
+        set { sceneToLoad = value; }
     }
     #endregion
 }

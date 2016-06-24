@@ -41,13 +41,19 @@ public class Server : Personnages
         {
             if (isLoad)
             {
-                if (ddos_load && cible != -1 && Input.GetKey(KeyCode.Alpha2))
+                if (ddos_load && cible != -1 
+                    && Input.GetKey(KeyCode.Alpha2)
+                    && checkMana(20))
                 {
+                    updateManaRPC(20);
                     DDOS(cible);
                     StartCoroutine(Loading());
                 }
-                else if (firewall_load && Input.GetKey(KeyCode.Alpha3))
+                else if (firewall_load 
+                    && Input.GetKey(KeyCode.Alpha3)
+                    && checkMana(20))
                 {
+                    updateManaRPC(20);
                     firewallRPC(cible);
                     StartCoroutine(Loading());
                 }
